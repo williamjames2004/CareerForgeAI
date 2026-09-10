@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -11,65 +12,112 @@
 
     <title>Group Discussion Setup | CareerForge AI</title>
 
-    <!-- Bootstrap -->
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    <!-- Bootstrap Icons -->
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     >
 
+
     <style>
 
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
         body {
+
             background: #f8f9fa;
+
+            color: #212529;
+
         }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
 
         .navbar {
+
             background: #ffffff;
+
             border-bottom: 1px solid #e9ecef;
+
         }
 
+
         .brand-icon {
+
             width: 42px;
+
             height: 42px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             border-radius: 12px;
 
             background: #0d6efd;
+
             color: #ffffff;
 
             font-size: 21px;
+
         }
+
 
         .navbar-brand {
+
             font-weight: 700;
+
         }
 
+
+        /* =====================================================
+           PAGE HEADER
+        ====================================================== */
+
         .page-header {
-            padding: 55px 0 35px;
+
+            padding: 55px 0 40px;
 
             background:
+
                 radial-gradient(
                     circle at top right,
                     rgba(13, 110, 253, 0.10),
                     transparent 35%
                 ),
+
                 #ffffff;
+
         }
 
+
         .page-badge {
+
             display: inline-flex;
 
             align-items: center;
+
             gap: 8px;
 
             padding: 8px 15px;
@@ -77,97 +125,337 @@
             border-radius: 50px;
 
             background: #e7f1ff;
+
             color: #0d6efd;
 
             font-size: 14px;
+
             font-weight: 600;
+
         }
 
+
         .page-header h1 {
+
             font-size: 2.8rem;
+
             font-weight: 800;
 
             margin-top: 18px;
+
         }
+
 
         .page-header p {
+
             color: #6c757d;
-            max-width: 700px;
+
+            max-width: 720px;
 
             margin: 15px auto;
+
+            line-height: 1.7;
+
         }
+
+
+        /* =====================================================
+           SETUP SECTION
+        ====================================================== */
 
         .setup-section {
+
             padding: 40px 0 80px;
+
         }
 
+
         .setup-card {
+
             background: #ffffff;
 
             border: 1px solid #e9ecef;
+
             border-radius: 20px;
 
             padding: 30px;
+
         }
+
 
         .card-title {
+
             font-weight: 700;
+
         }
+
+
+        .section-description {
+
+            color: #6c757d;
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
 
         .form-label {
+
             font-weight: 600;
+
         }
+
 
         .form-control,
+
         .form-select {
-            padding: 12px 14px;
+
+            padding: 13px 15px;
+
             border-radius: 12px;
+
+            border: 1px solid #dee2e6;
+
         }
 
-        .participant-card {
-            border: 1px solid #e9ecef;
-            border-radius: 15px;
 
-            padding: 15px;
+        .form-control:focus,
+
+        .form-select:focus {
+
+            border-color: #86b7fe;
+
+            box-shadow:
+                0 0 0 0.2rem
+                rgba(13, 110, 253, 0.10);
+
+        }
+
+
+        /* =====================================================
+           TOPIC EXAMPLES
+        ====================================================== */
+
+        .topic-example {
+
+            cursor: pointer;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 12px;
+
+            padding: 12px 14px;
 
             background: #ffffff;
 
             transition: 0.2s;
+
         }
 
-        .participant-card:hover {
+
+        .topic-example:hover {
+
             border-color: #0d6efd;
+
+            background: #f8fbff;
+
         }
 
-        .participant-icon {
-            width: 42px;
-            height: 42px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .topic-example i {
 
-            border-radius: 12px;
-
-            background: #e7f1ff;
             color: #0d6efd;
 
-            font-size: 19px;
         }
 
-        .ai-label {
-            font-size: 12px;
+
+        /* =====================================================
+           AI PARTICIPANTS
+        ====================================================== */
+
+        .participant-card {
+
+            height: 100%;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            background: #ffffff;
+
+            transition: 0.2s;
+
+        }
+
+
+        .participant-card:hover {
+
+            border-color: #0d6efd;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .participant-icon {
+
+            width: 46px;
+
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #e7f1ff;
+
+            color: #0d6efd;
+
+            font-size: 20px;
+
+        }
+
+
+        .participant-number {
+
+            font-size: 11px;
+
             color: #6c757d;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
         }
 
-        .start-btn {
-            padding: 14px 30px;
-            border-radius: 12px;
+
+        .participant-name {
 
             font-weight: 700;
+
+            margin-top: 2px;
+
         }
 
+
+        .participant-role {
+
+            font-size: 12px;
+
+            color: #6c757d;
+
+            line-height: 1.4;
+
+        }
+
+
+        /* =====================================================
+           INFO BOX
+        ====================================================== */
+
+        .info-box {
+
+            border-radius: 14px;
+
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            padding: 16px;
+
+        }
+
+
+        .info-box i {
+
+            color: #0d6efd;
+
+        }
+
+
+        /* =====================================================
+           START BUTTON
+        ====================================================== */
+
+        .start-btn {
+
+            padding: 14px 32px;
+
+            border-radius: 13px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 8px 20px
+                rgba(13, 110, 253, 0.15);
+
+        }
+
+
+        .start-btn:disabled {
+
+            opacity: 0.75;
+
+            cursor: wait;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            z-index: 9999;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+        }
+
+
+        .loading-overlay.show {
+
+            display: flex;
+
+        }
+
+
+        .loading-spinner {
+
+            width: 55px;
+
+            height: 55px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
         footer {
+
             padding: 25px 0;
 
             background: #ffffff;
@@ -175,6 +463,28 @@
             border-top: 1px solid #e9ecef;
 
             color: #6c757d;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .page-header h1 {
+
+                font-size: 2.1rem;
+
+            }
+
+            .setup-card {
+
+                padding: 22px;
+
+            }
+
         }
 
     </style>
@@ -185,26 +495,71 @@
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- =========================================================
+     LOADING OVERLAY
+========================================================== -->
 
-<nav class="navbar navbar-expand-lg">
+<div
+    class="loading-overlay"
+    id="loadingOverlay"
+>
+
+    <div>
+
+        <div
+            class="spinner-border text-primary loading-spinner"
+            role="status"
+        ></div>
+
+        <h5 class="fw-bold mt-4">
+
+            Preparing Your AI Discussion
+
+        </h5>
+
+        <p class="text-muted mb-0">
+
+            Gemini is creating seven unique discussion participants...
+
+        </p>
+
+        <p class="text-muted small">
+
+            This may take a few seconds.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<nav class="navbar">
 
     <div class="container">
 
-        <a
-            class="navbar-brand d-flex align-items-center gap-2"
-            href="{{ url_for('index') }}"
-        >
+        <div class="d-flex align-items-center justify-content-between w-100">
 
-            <span class="brand-icon">
-                <i class="bi bi-stars"></i>
-            </span>
+            <a
+                class="navbar-brand d-flex align-items-center gap-2 text-decoration-none text-dark"
+                href="{{ url_for('index') }}"
+            >
 
-            CareerForge AI
+                <span class="brand-icon">
 
-        </a>
+                    <i class="bi bi-stars"></i>
 
-        <div>
+                </span>
+
+                CareerForge AI
+
+            </a>
+
 
             <a
                 href="{{ url_for('index') }}"
@@ -225,7 +580,9 @@
 
 
 
-<!-- ================= HEADER ================= -->
+<!-- =========================================================
+     PAGE HEADER
+========================================================== -->
 
 <section class="page-header text-center">
 
@@ -239,14 +596,20 @@
 
         </span>
 
+
         <h1>
+
             Set Up Your Discussion
+
         </h1>
+
 
         <p>
 
-            Configure your topic, discussion duration, and
-            participants before entering the AI-powered discussion room.
+            Practice a realistic group discussion with seven AI
+            participants, each representing a different perspective.
+            Speak naturally, defend your ideas, and receive AI-powered
+            performance feedback.
 
         </p>
 
@@ -256,19 +619,24 @@
 
 
 
-<!-- ================= SETUP ================= -->
+<!-- =========================================================
+     SETUP
+========================================================== -->
 
 <section class="setup-section">
 
     <div class="container">
 
         <form
-            action="{{ url_for('group_discussion') }}"
+            action="{{ url_for('group_discussion_setup') }}"
             method="POST"
+            id="setupForm"
         >
 
 
-            <!-- ================= TOPIC ================= -->
+            <!-- =================================================
+                 DISCUSSION DETAILS
+            ================================================== -->
 
             <div class="setup-card mb-4">
 
@@ -280,14 +648,17 @@
 
                 </h4>
 
-                <p class="text-muted mb-4">
 
-                    Choose what you want to discuss.
+                <p class="section-description mb-4">
+
+                    Choose a topic and decide how long you want to practice.
 
                 </p>
 
 
                 <div class="row g-4">
+
+                    <!-- TOPIC -->
 
                     <div class="col-lg-8">
 
@@ -300,17 +671,29 @@
 
                         </label>
 
+
                         <input
                             type="text"
                             name="topic"
                             id="topic"
                             class="form-control"
                             placeholder="Example: Is Artificial Intelligence a threat to jobs?"
+                            maxlength="300"
                             required
                         >
 
+
+                        <div class="form-text">
+
+                            Choose a topic commonly discussed in placements,
+                            interviews, or group discussions.
+
+                        </div>
+
                     </div>
 
+
+                    <!-- DURATION -->
 
                     <div class="col-lg-4">
 
@@ -323,6 +706,7 @@
 
                         </label>
 
+
                         <select
                             name="duration"
                             id="duration"
@@ -330,23 +714,124 @@
                             required
                         >
 
+                            <option value="3">
+
+                                3 Minutes
+
+                            </option>
+
                             <option value="5">
+
                                 5 Minutes
+
                             </option>
 
                             <option value="10" selected>
+
                                 10 Minutes
+
                             </option>
 
                             <option value="15">
+
                                 15 Minutes
+
                             </option>
 
                             <option value="20">
+
                                 20 Minutes
+
+                            </option>
+
+                            <option value="30">
+
+                                30 Minutes
+
                             </option>
 
                         </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOPIC EXAMPLES -->
+
+                <div class="mt-4">
+
+                    <div class="small fw-semibold text-secondary mb-2">
+
+                        Try an example topic
+
+                    </div>
+
+
+                    <div class="row g-2">
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="topic-example"
+                                data-topic="Is Artificial Intelligence a threat to jobs?"
+                            >
+
+                                <i class="bi bi-cpu me-2"></i>
+
+                                Is AI a threat to jobs?
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="topic-example"
+                                data-topic="Impact of social media on students"
+                            >
+
+                                <i class="bi bi-phone me-2"></i>
+
+                                Impact of social media on students
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="topic-example"
+                                data-topic="Should companies allow permanent work from home?"
+                            >
+
+                                <i class="bi bi-house-check me-2"></i>
+
+                                Should companies allow permanent work from home?
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="topic-example"
+                                data-topic="Does technology make students more productive?"
+                            >
+
+                                <i class="bi bi-laptop me-2"></i>
+
+                                Does technology make students more productive?
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -356,7 +841,9 @@
 
 
 
-            <!-- ================= HUMAN ================= -->
+            <!-- =================================================
+                 USER DETAILS
+            ================================================== -->
 
             <div class="setup-card mb-4">
 
@@ -368,9 +855,10 @@
 
                 </h4>
 
-                <p class="text-muted mb-4">
 
-                    Enter the name you want to use during the discussion.
+                <p class="section-description mb-4">
+
+                    Enter the name that will appear in the discussion.
 
                 </p>
 
@@ -384,12 +872,14 @@
 
                 </label>
 
+
                 <input
                     type="text"
                     name="human_name"
                     id="human_name"
                     class="form-control"
                     placeholder="Enter your name"
+                    maxlength="100"
                     required
                 >
 
@@ -397,55 +887,79 @@
 
 
 
-            <!-- ================= AI PARTICIPANTS ================= -->
+            <!-- =================================================
+                 AI PARTICIPANTS
+            ================================================== -->
 
             <div class="setup-card mb-4">
 
-                <h4 class="card-title mb-1">
+                <div class="d-flex align-items-start gap-3">
 
-                    <i class="bi bi-robot text-primary me-2"></i>
+                    <div class="participant-icon flex-shrink-0">
 
-                    AI Participants
+                        <i class="bi bi-robot"></i>
 
-                </h4>
-
-                <p class="text-muted mb-4">
-
-                    Customize the names of the seven AI participants.
-
-                </p>
+                    </div>
 
 
-                <div class="row g-3">
+                    <div>
+
+                        <h4 class="card-title mb-1">
+
+                            Seven AI Participants
+
+                        </h4>
 
 
-                    <!-- AI 1 -->
+                        <p class="section-description mb-0">
 
-                    <div class="col-md-6">
+                            The AI will automatically create seven participants
+                            with different viewpoints such as technology,
+                            business, ethics, social impact, and critical thinking.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-3 mt-3">
+
+
+                    <!-- PARTICIPANT 1 -->
+
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
 
-                                    <i class="bi bi-robot"></i>
+                                    <i class="bi bi-graph-up"></i>
 
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 01
+                                    <div class="participant-number">
+
+                                        Participant 01
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_1"
-                                        class="form-control mt-1"
-                                        value="Alex"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Analytical Thinker
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Facts, logic and evidence
+
+                                    </div>
 
                                 </div>
 
@@ -456,31 +970,39 @@
                     </div>
 
 
-                    <!-- AI 2 -->
+                    <!-- PARTICIPANT 2 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-people"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 02
+                                    <div class="participant-number">
+
+                                        Participant 02
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_2"
-                                        class="form-control mt-1"
-                                        value="Sarah"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Social Perspective
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        People, society and communities
+
+                                    </div>
 
                                 </div>
 
@@ -491,31 +1013,39 @@
                     </div>
 
 
-                    <!-- AI 3 -->
+                    <!-- PARTICIPANT 3 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-cpu"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 03
+                                    <div class="participant-number">
+
+                                        Participant 03
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_3"
-                                        class="form-control mt-1"
-                                        value="David"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Technology Expert
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Technology and innovation
+
+                                    </div>
 
                                 </div>
 
@@ -526,31 +1056,39 @@
                     </div>
 
 
-                    <!-- AI 4 -->
+                    <!-- PARTICIPANT 4 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-shield-exclamation"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 04
+                                    <div class="participant-number">
+
+                                        Participant 04
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_4"
-                                        class="form-control mt-1"
-                                        value="Emma"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Critical Thinker
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Risks, limitations and opposing views
+
+                                    </div>
 
                                 </div>
 
@@ -561,31 +1099,39 @@
                     </div>
 
 
-                    <!-- AI 5 -->
+                    <!-- PARTICIPANT 5 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-building"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 05
+                                    <div class="participant-number">
+
+                                        Participant 05
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_5"
-                                        class="form-control mt-1"
-                                        value="Michael"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Business Perspective
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Economy, employment and industry
+
+                                    </div>
 
                                 </div>
 
@@ -596,31 +1142,39 @@
                     </div>
 
 
-                    <!-- AI 6 -->
+                    <!-- PARTICIPANT 6 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-balance-scale"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 06
+                                    <div class="participant-number">
+
+                                        Participant 06
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_6"
-                                        class="form-control mt-1"
-                                        value="Olivia"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Ethical Perspective
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Ethics, fairness and responsibility
+
+                                    </div>
 
                                 </div>
 
@@ -631,31 +1185,39 @@
                     </div>
 
 
-                    <!-- AI 7 -->
+                    <!-- PARTICIPANT 7 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-4">
 
                         <div class="participant-card">
 
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex gap-3">
 
                                 <div class="participant-icon">
-                                    <i class="bi bi-robot"></i>
+
+                                    <i class="bi bi-diagram-3"></i>
+
                                 </div>
 
-                                <div class="flex-grow-1">
+                                <div>
 
-                                    <div class="ai-label">
-                                        AI Participant 07
+                                    <div class="participant-number">
+
+                                        Participant 07
+
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="ai_7"
-                                        class="form-control mt-1"
-                                        value="James"
-                                        required
-                                    >
+                                    <div class="participant-name">
+
+                                        Balanced Speaker
+
+                                    </div>
+
+                                    <div class="participant-role">
+
+                                        Balanced arguments and conclusions
+
+                                    </div>
 
                                 </div>
 
@@ -671,13 +1233,52 @@
 
 
 
-            <!-- ================= START ================= -->
+            <!-- =================================================
+                 INFORMATION
+            ================================================== -->
+
+            <div class="info-box mb-4">
+
+                <div class="d-flex gap-3">
+
+                    <i class="bi bi-info-circle-fill fs-5"></i>
+
+                    <div>
+
+                        <strong>
+
+                            How the discussion works
+
+                        </strong>
+
+                        <div class="small text-secondary mt-1">
+
+                            The AI participants will introduce different
+                            viewpoints. You can respond using your microphone.
+                            The AI will react to your points and evaluate your
+                            communication, relevance, clarity, arguments,
+                            and participation.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 START
+            ================================================== -->
 
             <div class="text-center">
 
                 <button
                     type="submit"
                     class="btn btn-primary btn-lg start-btn"
+                    id="startButton"
                 >
 
                     <i class="bi bi-play-fill me-2"></i>
@@ -686,16 +1287,22 @@
 
                 </button>
 
+
                 <div class="text-muted small mt-3">
 
-                    <i class="bi bi-info-circle me-1"></i>
+                    <i class="bi bi-mic me-1"></i>
 
-                    You will have 10 seconds to prepare before the discussion begins.
+                    Make sure your microphone is available.
+
+                    <span class="mx-1">•</span>
+
+                    <i class="bi bi-stars me-1"></i>
+
+                    AI-generated discussion
 
                 </div>
 
             </div>
-
 
         </form>
 
@@ -705,7 +1312,9 @@
 
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =========================================================
+     FOOTER
+========================================================== -->
 
 <footer>
 
@@ -719,6 +1328,7 @@
 
         </strong>
 
+
         <div class="small mt-1">
 
             AI-Powered Communication & Placement Trainer
@@ -728,6 +1338,71 @@
     </div>
 
 </footer>
+
+
+
+<script>
+
+    /* =========================================================
+       TOPIC EXAMPLES
+    ========================================================== */
+
+    const topicInput =
+        document.getElementById("topic");
+
+
+    document
+        .querySelectorAll(".topic-example")
+        .forEach(function(element) {
+
+            element.addEventListener(
+                "click",
+                function() {
+
+                    topicInput.value =
+                        element.dataset.topic;
+
+                    topicInput.focus();
+
+                }
+            );
+
+        });
+
+
+
+    /* =========================================================
+       FORM SUBMIT
+    ========================================================== */
+
+    const setupForm =
+        document.getElementById("setupForm");
+
+
+    const loadingOverlay =
+        document.getElementById("loadingOverlay");
+
+
+    const startButton =
+        document.getElementById("startButton");
+
+
+    setupForm.addEventListener(
+        "submit",
+        function() {
+
+            startButton.disabled = true;
+
+            startButton.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-2"></span>' +
+                'Preparing Discussion...';
+
+            loadingOverlay.classList.add("show");
+
+        }
+    );
+
+</script>
 
 
 </body>
