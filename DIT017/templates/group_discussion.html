@@ -43,6 +43,8 @@
 
             background: #f5f7fa;
 
+            color: #212529;
+
         }
 
 
@@ -88,7 +90,7 @@
 
 
         /* =====================================================
-           DISCUSSION HEADER
+           HEADER
         ====================================================== */
 
         .discussion-header {
@@ -106,16 +108,22 @@
 
             color: #6c757d;
 
-            font-size: 13px;
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.05em;
 
         }
 
 
         .topic-title {
 
-            font-size: 1.15rem;
+            font-size: 1.2rem;
 
             font-weight: 700;
+
+            margin-top: 4px;
 
         }
 
@@ -138,6 +146,28 @@
 
             font-weight: 700;
 
+            min-width: 105px;
+
+            justify-content: center;
+
+        }
+
+
+        .timer.warning {
+
+            background: #fff3cd;
+
+            color: #997404;
+
+        }
+
+
+        .timer.danger {
+
+            background: #f8d7da;
+
+            color: #b02a37;
+
         }
 
 
@@ -147,7 +177,7 @@
 
         .discussion-section {
 
-            padding: 30px 0 50px;
+            padding: 30px 0 60px;
 
         }
 
@@ -162,13 +192,15 @@
 
             border: 1px solid #e9ecef;
 
-            border-radius: 15px;
+            border-radius: 16px;
 
             padding: 15px;
 
             text-align: center;
 
-            transition: 0.2s;
+            transition: 0.25s;
+
+            height: 100%;
 
         }
 
@@ -179,14 +211,27 @@
 
             box-shadow:
                 0 0 0 3px
-                rgba(
-                    13,
-                    110,
-                    253,
-                    0.10
-                );
+                rgba(13, 110, 253, 0.10);
 
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+
+        }
+
+
+        .participant-card.human {
+
+            border-color: #d1e7dd;
+
+        }
+
+
+        .participant-card.human.active {
+
+            border-color: #198754;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(25, 135, 84, 0.12);
 
         }
 
@@ -229,7 +274,7 @@
 
             margin-top: 9px;
 
-            font-weight: 600;
+            font-weight: 700;
 
             font-size: 14px;
 
@@ -241,6 +286,37 @@
             color: #6c757d;
 
             font-size: 11px;
+
+            line-height: 1.4;
+
+            min-height: 30px;
+
+        }
+
+
+        .participant-status {
+
+            margin-top: 8px;
+
+            font-size: 10px;
+
+            color: #6c757d;
+
+        }
+
+
+        .participant-card.active .participant-status {
+
+            color: #0d6efd;
+
+            font-weight: 600;
+
+        }
+
+
+        .participant-card.human.active .participant-status {
+
+            color: #198754;
 
         }
 
@@ -258,6 +334,10 @@
             border-radius: 20px;
 
             overflow: hidden;
+
+            box-shadow:
+                0 8px 30px
+                rgba(0, 0, 0, 0.03);
 
         }
 
@@ -277,14 +357,62 @@
 
         .discussion-feed {
 
-            height: 430px;
+            height: 450px;
 
             overflow-y: auto;
 
             padding: 25px;
 
+            scroll-behavior: smooth;
+
         }
 
+
+        .empty-feed {
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: #6c757d;
+
+        }
+
+
+        .empty-feed-icon {
+
+            width: 65px;
+
+            height: 65px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #e7f1ff;
+
+            color: #0d6efd;
+
+            font-size: 26px;
+
+        }
+
+
+        /* =====================================================
+           MESSAGES
+        ====================================================== */
 
         .message {
 
@@ -294,12 +422,35 @@
 
             margin-bottom: 22px;
 
+            animation: messageIn 0.25s ease;
+
         }
 
 
         .message.you {
 
             flex-direction: row-reverse;
+
+        }
+
+
+        @keyframes messageIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(8px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
 
         }
 
@@ -338,7 +489,7 @@
 
         .message-content {
 
-            max-width: 75%;
+            max-width: 78%;
 
         }
 
@@ -351,6 +502,8 @@
 
             margin-bottom: 4px;
 
+            font-weight: 600;
+
         }
 
 
@@ -362,7 +515,9 @@
 
             background: #f1f3f5;
 
-            line-height: 1.55;
+            line-height: 1.6;
+
+            white-space: pre-wrap;
 
         }
 
@@ -377,7 +532,94 @@
 
 
         /* =====================================================
-           VOICE CONTROL
+           TYPING INDICATOR
+        ====================================================== */
+
+        .typing-message {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .typing-bubble {
+
+            padding: 13px 17px;
+
+            background: #f1f3f5;
+
+            border-radius: 15px;
+
+        }
+
+
+        .typing-dots {
+
+            display: flex;
+
+            gap: 4px;
+
+        }
+
+
+        .typing-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #6c757d;
+
+            animation: typing 1.2s infinite;
+
+        }
+
+
+        .typing-dot:nth-child(2) {
+
+            animation-delay: 0.15s;
+
+        }
+
+
+        .typing-dot:nth-child(3) {
+
+            animation-delay: 0.3s;
+
+        }
+
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+
+                transform: translateY(0);
+
+                opacity: 0.5;
+
+            }
+
+            30% {
+
+                transform: translateY(-4px);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           VOICE AREA
         ====================================================== */
 
         .voice-area {
@@ -417,10 +659,14 @@
 
             transition: 0.2s;
 
+            box-shadow:
+                0 8px 20px
+                rgba(13, 110, 253, 0.20);
+
         }
 
 
-        .mic-button:hover {
+        .mic-button:hover:not(:disabled) {
 
             transform: scale(1.05);
 
@@ -440,9 +686,11 @@
 
         .mic-button:disabled {
 
-            opacity: 0.5;
+            opacity: 0.45;
 
             cursor: not-allowed;
+
+            box-shadow: none;
 
         }
 
@@ -453,12 +701,7 @@
 
                 box-shadow:
                     0 0 0 0
-                    rgba(
-                        220,
-                        53,
-                        69,
-                        0.5
-                    );
+                    rgba(220, 53, 69, 0.5);
 
             }
 
@@ -466,12 +709,7 @@
 
                 box-shadow:
                     0 0 0 20px
-                    rgba(
-                        220,
-                        53,
-                        69,
-                        0
-                    );
+                    rgba(220, 53, 69, 0);
 
             }
 
@@ -479,12 +717,7 @@
 
                 box-shadow:
                     0 0 0 0
-                    rgba(
-                        220,
-                        53,
-                        69,
-                        0
-                    );
+                    rgba(220, 53, 69, 0);
 
             }
 
@@ -499,12 +732,67 @@
 
             color: #6c757d;
 
+            min-height: 24px;
+
         }
 
 
         .voice-status.listening {
 
             color: #dc3545;
+
+        }
+
+
+        /* =====================================================
+           LIVE TRANSCRIPT
+        ====================================================== */
+
+        .transcript-box {
+
+            max-width: 650px;
+
+            margin: 18px auto 0;
+
+            display: none;
+
+            text-align: left;
+
+            padding: 12px 15px;
+
+            background: #f8f9fa;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            color: #495057;
+
+        }
+
+
+        .transcript-box.show {
+
+            display: block;
+
+        }
+
+
+        .transcript-label {
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.05em;
+
+            font-weight: 700;
+
+            color: #6c757d;
+
+            margin-bottom: 4px;
 
         }
 
@@ -597,12 +885,7 @@
 
             inset: 0;
 
-            background: rgba(
-                255,
-                255,
-                255,
-                0.97
-            );
+            background: rgba(255, 255, 255, 0.97);
 
             z-index: 9999;
 
@@ -653,6 +936,110 @@
 
 
         /* =====================================================
+           RESULT MODAL
+        ====================================================== */
+
+        .score-circle {
+
+            width: 125px;
+
+            height: 125px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #e7f1ff;
+
+            color: #0d6efd;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .score-number {
+
+            font-size: 2.4rem;
+
+            line-height: 1;
+
+            font-weight: 800;
+
+        }
+
+
+        .score-label {
+
+            font-size: 11px;
+
+            color: #6c757d;
+
+            margin-top: 5px;
+
+        }
+
+
+        .score-card {
+
+            background: #f8f9fa;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 14px;
+
+            padding: 15px;
+
+            height: 100%;
+
+        }
+
+
+        .score-card-title {
+
+            font-size: 12px;
+
+            color: #6c757d;
+
+            font-weight: 600;
+
+        }
+
+
+        .score-card-value {
+
+            font-size: 1.35rem;
+
+            font-weight: 800;
+
+            margin-top: 4px;
+
+        }
+
+
+        .feedback-list {
+
+            padding-left: 20px;
+
+            margin-bottom: 0;
+
+        }
+
+
+        .feedback-list li {
+
+            margin-bottom: 7px;
+
+        }
+
+
+        /* =====================================================
            FOOTER
         ====================================================== */
 
@@ -677,7 +1064,7 @@
 
             .discussion-feed {
 
-                height: 400px;
+                height: 420px;
 
                 padding: 18px;
 
@@ -690,6 +1077,13 @@
 
             }
 
+
+            .prep-number {
+
+                font-size: 5rem;
+
+            }
+
         }
 
     </style>
@@ -697,13 +1091,12 @@
 </head>
 
 
-
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================================
      PREPARATION OVERLAY
-====================================================== -->
+========================================================== -->
 
 <div
     class="preparation-overlay"
@@ -712,9 +1105,7 @@
 
     <div>
 
-        <i
-            class="bi bi-people-fill text-primary fs-1"
-        ></i>
+        <i class="bi bi-people-fill text-primary fs-1"></i>
 
 
         <h2 class="fw-bold mt-3">
@@ -736,7 +1127,7 @@
 
         <div class="prep-text">
 
-            The discussion will begin shortly.
+            The AI participants are ready.
 
         </div>
 
@@ -748,7 +1139,7 @@
 
             <i class="bi bi-mic me-1"></i>
 
-            Start Speaking
+            Start Discussion
 
         </button>
 
@@ -758,44 +1149,47 @@
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      NAVBAR
-====================================================== -->
+========================================================== -->
 
 <nav class="navbar">
 
     <div class="container">
 
+        <div class="d-flex align-items-center justify-content-between w-100">
 
-        <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
 
-            <span class="brand-icon">
+                <span class="brand-icon">
 
-                <i class="bi bi-stars"></i>
+                    <i class="bi bi-stars"></i>
 
-            </span>
+                </span>
 
 
-            <strong>
+                <strong>
 
-                CareerForge AI
+                    CareerForge AI
 
-            </strong>
+                </strong>
+
+            </div>
+
+
+            <button
+                class="btn btn-outline-danger btn-sm"
+                id="endButton"
+                type="button"
+            >
+
+                <i class="bi bi-stop-circle me-1"></i>
+
+                End Discussion
+
+            </button>
 
         </div>
-
-
-        <button
-            class="btn btn-outline-danger btn-sm"
-            onclick="endDiscussion()"
-        >
-
-            <i class="bi bi-stop-circle me-1"></i>
-
-            End Discussion
-
-        </button>
-
 
     </div>
 
@@ -803,16 +1197,15 @@
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      DISCUSSION HEADER
-====================================================== -->
+========================================================== -->
 
 <section class="discussion-header">
 
     <div class="container">
 
         <div class="row align-items-center">
-
 
             <div class="col-md-8">
 
@@ -828,7 +1221,7 @@
                     id="topicTitle"
                 >
 
-                    Is Artificial Intelligence a threat to jobs?
+                    Loading topic...
 
                 </div>
 
@@ -844,21 +1237,23 @@
                 "
             >
 
-                <span class="timer">
+                <span
+                    class="timer"
+                    id="timerContainer"
+                >
 
                     <i class="bi bi-stopwatch"></i>
 
 
                     <span id="discussionTimer">
 
-                        10:00
+                        00:00
 
                     </span>
 
                 </span>
 
             </div>
-
 
         </div>
 
@@ -868,9 +1263,9 @@
 
 
 
-<!-- =====================================================
-     MAIN DISCUSSION
-====================================================== -->
+<!-- =========================================================
+     MAIN
+========================================================== -->
 
 <section class="discussion-section">
 
@@ -881,304 +1276,12 @@
              PARTICIPANTS
         ================================================== -->
 
-        <div class="row g-3 mb-4">
-
-
-            <!-- AI 1 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-1"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-1"
-                    >
-
-                        Alex
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 2 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-2"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-2"
-                    >
-
-                        Sarah
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 3 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-3"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-3"
-                    >
-
-                        David
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 4 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-4"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-4"
-                    >
-
-                        Emma
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 5 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-5"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-5"
-                    >
-
-                        Michael
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 6 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-6"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-6"
-                    >
-
-                        Olivia
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI 7 -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card"
-                    id="participant-7"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-robot"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="name-7"
-                    >
-
-                        James
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        AI Participant
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HUMAN -->
-
-            <div class="col-6 col-md-3 col-lg">
-
-                <div
-                    class="participant-card human"
-                    id="participant-human"
-                >
-
-                    <div class="participant-avatar">
-
-                        <i class="bi bi-person"></i>
-
-                    </div>
-
-
-                    <div
-                        class="participant-name"
-                        id="humanName"
-                    >
-
-                        You
-
-                    </div>
-
-
-                    <div class="participant-role">
-
-                        Human
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div
+            class="row g-3 mb-4"
+            id="participantsContainer"
+        >
+
+            <!-- Participants are inserted by JavaScript -->
 
         </div>
 
@@ -1195,25 +1298,43 @@
 
             <div class="discussion-card-header">
 
-                <strong>
+                <div class="d-flex align-items-center justify-content-between">
 
-                    <i
-                        class="bi bi-chat-dots text-primary me-2"
-                    ></i>
+                    <div>
 
-                    Live Discussion
+                        <strong>
 
-                </strong>
+                            <i
+                                class="bi bi-chat-dots text-primary me-2"
+                            ></i>
+
+                            Live Discussion
+
+                        </strong>
 
 
-                <span
-                    class="badge text-bg-success ms-2"
-                    id="liveStatus"
-                >
+                        <span
+                            class="badge text-bg-secondary ms-2"
+                            id="liveStatus"
+                        >
 
-                    Preparing
+                            Preparing
 
-                </span>
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="small text-secondary"
+                        id="turnLabel"
+                    >
+
+                        Waiting
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1221,17 +1342,40 @@
 
             <!-- =================================================
                  FEED
-
-                 NOTE:
-                 This feed is only for visual simulation.
-                 Later we can replace this with voice-only
-                 interaction.
             ================================================== -->
 
             <div
                 class="discussion-feed"
                 id="discussionFeed"
             >
+
+                <div class="empty-feed">
+
+                    <div>
+
+                        <div class="empty-feed-icon">
+
+                            <i class="bi bi-chat-square-dots"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold mt-3">
+
+                            Discussion is preparing
+
+                        </h5>
+
+
+                        <p class="small mb-0">
+
+                            The AI participants will begin shortly.
+
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1260,6 +1404,8 @@
                 </div>
 
 
+                <!-- STATUS -->
+
                 <div
                     class="voice-status"
                     id="voiceStatus"
@@ -1287,18 +1433,38 @@
                 </button>
 
 
-                <div class="small text-secondary mt-2">
+                <!-- TRANSCRIPT -->
+
+                <div
+                    class="transcript-box"
+                    id="transcriptBox"
+                >
+
+                    <div class="transcript-label">
+
+                        Your speech
+
+                    </div>
+
+
+                    <div id="transcriptText">
+
+                        Listening...
+
+                    </div>
+
+                </div>
+
+
+                <div class="small text-secondary mt-3">
 
                     Speak naturally when the microphone is active.
 
                 </div>
 
-
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -1306,9 +1472,287 @@
 
 
 
-<!-- =====================================================
+<!-- =========================================================
+     RESULT MODAL
+========================================================== -->
+
+<div
+    class="modal fade"
+    id="resultModal"
+    tabindex="-1"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+>
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content border-0 rounded-4">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h5 class="modal-title fw-bold">
+
+                        <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+
+                        Discussion Performance
+
+                    </h5>
+
+                    <div class="small text-secondary">
+
+                        AI-generated analysis of your participation
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <!-- OVERALL SCORE -->
+
+                <div class="text-center mb-4">
+
+                    <div class="score-circle">
+
+                        <div
+                            class="score-number"
+                            id="overallScore"
+                        >
+
+                            --
+
+                        </div>
+
+                        <div class="score-label">
+
+                            Overall Score
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SCORE CARDS -->
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-6 col-md-3">
+
+                        <div class="score-card">
+
+                            <div class="score-card-title">
+
+                                Communication
+
+                            </div>
+
+                            <div
+                                class="score-card-value"
+                                id="communicationScore"
+                            >
+
+                                --
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-3">
+
+                        <div class="score-card">
+
+                            <div class="score-card-title">
+
+                                Relevance
+
+                            </div>
+
+                            <div
+                                class="score-card-value"
+                                id="relevanceScore"
+                            >
+
+                                --
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-3">
+
+                        <div class="score-card">
+
+                            <div class="score-card-title">
+
+                                Clarity
+
+                            </div>
+
+                            <div
+                                class="score-card-value"
+                                id="clarityScore"
+                            >
+
+                                --
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-3">
+
+                        <div class="score-card">
+
+                            <div class="score-card-title">
+
+                                Arguments
+
+                            </div>
+
+                            <div
+                                class="score-card-value"
+                                id="argumentScore"
+                            >
+
+                                --
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STRENGTHS -->
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        <i class="bi bi-check-circle text-success me-2"></i>
+
+                        Strengths
+
+                    </h6>
+
+
+                    <ul
+                        class="feedback-list"
+                        id="strengthsList"
+                    ></ul>
+
+                </div>
+
+
+                <!-- WEAKNESSES -->
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        <i class="bi bi-exclamation-circle text-warning me-2"></i>
+
+                        Areas to Improve
+
+                    </h6>
+
+
+                    <ul
+                        class="feedback-list"
+                        id="weaknessesList"
+                    ></ul>
+
+                </div>
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="mb-4">
+
+                    <h6 class="fw-bold">
+
+                        <i class="bi bi-lightbulb text-primary me-2"></i>
+
+                        Recommendations
+
+                    </h6>
+
+
+                    <ul
+                        class="feedback-list"
+                        id="recommendationsList"
+                    ></ul>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="alert alert-light border mb-0">
+
+                    <strong>
+
+                        Summary
+
+                    </strong>
+
+
+                    <div
+                        class="small mt-2"
+                        id="resultSummary"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <a
+                    href="{{ url_for('index') }}"
+                    class="btn btn-primary"
+                >
+
+                    <i class="bi bi-house me-1"></i>
+
+                    Back to Home
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
      FOOTER
-====================================================== -->
+========================================================== -->
 
 <footer>
 
@@ -1328,103 +1772,73 @@
 
 
 
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+
 <script>
 
+    /* =========================================================
+       SESSION DATA
+    ========================================================== */
 
-    /* =====================================================
-       AI PARTICIPANTS
-    ====================================================== */
-
-    const aiParticipants = [
-
-        {
-            name: "Alex",
-
-            message:
-                "Artificial intelligence is transforming the workplace. While some repetitive jobs may be automated, I believe AI can also create new opportunities and allow people to focus on more creative and strategic work."
-        },
+    const discussionId =
+        "{{ discussion_id }}";
 
 
-        {
-            name: "Sarah",
-
-            message:
-                "I agree that AI can create new opportunities, but we should also consider the impact on workers whose jobs are heavily dependent on repetitive tasks. Reskilling will become increasingly important."
-        },
+    const initialTopic =
+        "{{ topic|default('', true)|e }}";
 
 
-        {
-            name: "David",
-
-            message:
-                "That's an interesting point. However, I think the key issue is not whether AI replaces jobs, but whether people and organizations are prepared to adapt to the changes."
-        },
-
-
-        {
-            name: "Emma",
-
-            message:
-                "Another important aspect is education. Students need to learn how to work with AI rather than simply fear it. AI literacy could become an essential skill in almost every profession."
-        },
-
-
-        {
-            name: "Michael",
-
-            message:
-                "I think AI will change the nature of jobs more than simply eliminate them. Many existing roles may evolve, while completely new roles could emerge around AI systems."
-        },
-
-
-        {
-            name: "Olivia",
-
-            message:
-                "We should also consider the social impact. Companies need responsible strategies for automation so that employees have opportunities to reskill and transition into new roles."
-        },
-
-
-        {
-            name: "James",
-
-            message:
-                "Ultimately, I believe humans and AI will work together. The people who learn to use AI effectively may have an advantage rather than being replaced by it."
-        }
-
-    ];
+    const initialDuration =
+        Number("{{ duration|default(10, true) }}") || 10;
 
 
 
-    /* =====================================================
-       VARIABLES
-    ====================================================== */
+    /* =========================================================
+       STATE
+    ========================================================== */
 
-    let preparationTime = 10;
-
-    let preparationInterval = null;
-
-    let discussionSeconds = 600;
-
-    let discussionInterval = null;
-
-    let currentAI = 0;
+    let discussionData = null;
 
     let discussionStarted = false;
 
     let discussionEnded = false;
 
+    let preparationTime = 10;
+
+    let preparationInterval = null;
+
+    let discussionSeconds =
+        initialDuration * 60;
+
+    let discussionInterval = null;
+
     let recognition = null;
 
     let isListening = false;
 
-    let currentHumanSpeech = "";
+    let currentSpeech = "";
+
+    let interimSpeech = "";
+
+    let processingResponse = false;
+
+    let finishRequested = false;
+
+    let speechGeneration = 0;
 
 
 
-    /* =====================================================
+    /* =========================================================
        DOM ELEMENTS
-    ====================================================== */
+    ========================================================== */
 
     const preparationOverlay =
         document.getElementById(
@@ -1444,15 +1858,51 @@
         );
 
 
-    const liveStatus =
+    const participantsContainer =
         document.getElementById(
-            "liveStatus"
+            "participantsContainer"
+        );
+
+
+    const topicTitle =
+        document.getElementById(
+            "topicTitle"
         );
 
 
     const discussionFeed =
         document.getElementById(
             "discussionFeed"
+        );
+
+
+    const liveStatus =
+        document.getElementById(
+            "liveStatus"
+        );
+
+
+    const turnLabel =
+        document.getElementById(
+            "turnLabel"
+        );
+
+
+    const discussionTimer =
+        document.getElementById(
+            "discussionTimer"
+        );
+
+
+    const timerContainer =
+        document.getElementById(
+            "timerContainer"
+        );
+
+
+    const voiceStatus =
+        document.getElementById(
+            "voiceStatus"
         );
 
 
@@ -1468,28 +1918,916 @@
         );
 
 
-    const voiceStatus =
-        document.getElementById(
-            "voiceStatus"
-        );
-
-
     const aiSpeakingIndicator =
         document.getElementById(
             "aiSpeakingIndicator"
         );
 
 
-    const discussionTimer =
+    const transcriptBox =
         document.getElementById(
-            "discussionTimer"
+            "transcriptBox"
+        );
+
+
+    const transcriptText =
+        document.getElementById(
+            "transcriptText"
+        );
+
+
+    const endButton =
+        document.getElementById(
+            "endButton"
         );
 
 
 
-    /* =====================================================
+    /* =========================================================
+       HELPERS
+    ========================================================== */
+
+    function escapeText(value) {
+
+        return String(value || "");
+
+    }
+
+
+
+    function setVoiceStatus(text, listening) {
+
+        voiceStatus.innerText =
+            text || "";
+
+        if (listening) {
+
+            voiceStatus.classList.add(
+                "listening"
+            );
+
+        }
+        else {
+
+            voiceStatus.classList.remove(
+                "listening"
+            );
+
+        }
+
+    }
+
+
+
+    function scrollFeed() {
+
+        discussionFeed.scrollTop =
+            discussionFeed.scrollHeight;
+
+    }
+
+
+
+    /* =========================================================
+       LOAD DISCUSSION
+    ========================================================== */
+
+    async function loadDiscussion() {
+
+        if (!discussionId) {
+
+            setVoiceStatus(
+                "No discussion session was found."
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/group-discussion/" +
+                    encodeURIComponent(
+                        discussionId
+                    )
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load discussion."
+                );
+
+            }
+
+
+            discussionData =
+                await response.json();
+
+
+            renderDiscussion();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            setVoiceStatus(
+                "Unable to load the discussion."
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       RENDER DISCUSSION
+    ========================================================== */
+
+    function renderDiscussion() {
+
+        if (!discussionData) {
+
+            return;
+
+        }
+
+
+        topicTitle.innerText =
+            discussionData.topic ||
+            initialTopic ||
+            "Group Discussion";
+
+
+        discussionSeconds =
+            Number(
+                discussionData.duration ||
+                initialDuration
+            ) * 60;
+
+
+        renderParticipants(
+            discussionData.participants ||
+            []
+        );
+
+    }
+
+
+
+    /* =========================================================
+       RENDER PARTICIPANTS
+    ========================================================== */
+
+    function renderParticipants(participants) {
+
+        participantsContainer.innerHTML = "";
+
+
+        participants.forEach(
+            function(participant, index) {
+
+                const column =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                column.className =
+                    "col-6 col-md-3 col-lg";
+
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "participant-card";
+
+
+                card.id =
+                    "participant-" +
+                    index;
+
+
+                const avatar =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                avatar.className =
+                    "participant-avatar";
+
+
+                avatar.innerHTML =
+                    '<i class="bi bi-robot"></i>';
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                name.className =
+                    "participant-name";
+
+
+                name.innerText =
+                    participant.name ||
+                    "AI Participant " +
+                    (index + 1);
+
+
+                const role =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                role.className =
+                    "participant-role";
+
+
+                role.innerText =
+                    participant.role ||
+                    "AI Participant";
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                status.className =
+                    "participant-status";
+
+
+                status.innerText =
+                    "AI Participant";
+
+
+                card.appendChild(
+                    avatar
+                );
+
+                card.appendChild(
+                    name
+                );
+
+                card.appendChild(
+                    role
+                );
+
+                card.appendChild(
+                    status
+                );
+
+
+                column.appendChild(
+                    card
+                );
+
+
+                participantsContainer.appendChild(
+                    column
+                );
+
+            }
+        );
+
+
+        /* -----------------------------------------------------
+           HUMAN CARD
+        ------------------------------------------------------ */
+
+        const humanColumn =
+            document.createElement(
+                "div"
+            );
+
+
+        humanColumn.className =
+            "col-6 col-md-3 col-lg";
+
+
+        const humanCard =
+            document.createElement(
+                "div"
+            );
+
+
+        humanCard.className =
+            "participant-card human";
+
+
+        humanCard.id =
+            "participant-human";
+
+
+        const humanAvatar =
+            document.createElement(
+                "div"
+            );
+
+
+        humanAvatar.className =
+            "participant-avatar";
+
+
+        humanAvatar.innerHTML =
+            '<i class="bi bi-person"></i>';
+
+
+        const humanName =
+            document.createElement(
+                "div"
+            );
+
+
+        humanName.className =
+            "participant-name";
+
+
+        humanName.innerText =
+            discussionData.human_name ||
+            "You";
+
+
+        const humanRole =
+            document.createElement(
+                "div"
+            );
+
+
+        humanRole.className =
+            "participant-role";
+
+
+        humanRole.innerText =
+            "Human Participant";
+
+
+        const humanStatus =
+            document.createElement(
+                "div"
+            );
+
+
+        humanStatus.className =
+            "participant-status";
+
+
+        humanStatus.innerText =
+            "You";
+
+
+        humanCard.appendChild(
+            humanAvatar
+        );
+
+        humanCard.appendChild(
+            humanName
+        );
+
+        humanCard.appendChild(
+            humanRole
+        );
+
+        humanCard.appendChild(
+            humanStatus
+        );
+
+
+        humanColumn.appendChild(
+            humanCard
+        );
+
+
+        participantsContainer.appendChild(
+            humanColumn
+        );
+
+    }
+
+
+
+    /* =========================================================
+       PARTICIPANT ACTIVE STATE
+    ========================================================== */
+
+    function activateParticipantByIndex(index) {
+
+        deactivateParticipants();
+
+
+        const element =
+            document.getElementById(
+                "participant-" +
+                index
+            );
+
+
+        if (element) {
+
+            element.classList.add(
+                "active"
+            );
+
+            const status =
+                element.querySelector(
+                    ".participant-status"
+                );
+
+
+            if (status) {
+
+                status.innerText =
+                    "Speaking...";
+
+            }
+
+        }
+
+    }
+
+
+
+    function activateHuman() {
+
+        deactivateParticipants();
+
+
+        const element =
+            document.getElementById(
+                "participant-human"
+            );
+
+
+        if (element) {
+
+            element.classList.add(
+                "active"
+            );
+
+
+            const status =
+                element.querySelector(
+                    ".participant-status"
+                );
+
+
+            if (status) {
+
+                status.innerText =
+                    "Your turn";
+
+            }
+
+        }
+
+    }
+
+
+
+    function deactivateParticipants() {
+
+        document
+            .querySelectorAll(
+                ".participant-card"
+            )
+            .forEach(
+                function(card) {
+
+                    card.classList.remove(
+                        "active"
+                    );
+
+
+                    const status =
+                        card.querySelector(
+                            ".participant-status"
+                        );
+
+
+                    if (status) {
+
+                        if (
+                            card.id ===
+                            "participant-human"
+                        ) {
+
+                            status.innerText =
+                                "You";
+
+                        }
+                        else {
+
+                            status.innerText =
+                                "AI Participant";
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+
+    /* =========================================================
+       EMPTY FEED
+    ========================================================== */
+
+    function clearEmptyFeed() {
+
+        const empty =
+            discussionFeed.querySelector(
+                ".empty-feed"
+            );
+
+
+        if (empty) {
+
+            empty.remove();
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       ADD AI MESSAGE
+    ========================================================== */
+
+    function addAIMessage(
+        name,
+        text,
+        participantIndex
+    ) {
+
+        clearEmptyFeed();
+
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+
+        message.className =
+            "message";
+
+
+        const avatar =
+            document.createElement(
+                "div"
+            );
+
+
+        avatar.className =
+            "message-avatar";
+
+
+        avatar.innerHTML =
+            '<i class="bi bi-robot"></i>';
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+
+        content.className =
+            "message-content";
+
+
+        const nameElement =
+            document.createElement(
+                "div"
+            );
+
+
+        nameElement.className =
+            "message-name";
+
+
+        nameElement.innerText =
+            name || "AI Participant";
+
+
+        const bubble =
+            document.createElement(
+                "div"
+            );
+
+
+        bubble.className =
+            "message-bubble";
+
+
+        bubble.innerText =
+            text || "";
+
+
+        content.appendChild(
+            nameElement
+        );
+
+
+        content.appendChild(
+            bubble
+        );
+
+
+        message.appendChild(
+            avatar
+        );
+
+
+        message.appendChild(
+            content
+        );
+
+
+        discussionFeed.appendChild(
+            message
+        );
+
+
+        scrollFeed();
+
+
+        if (
+            Number.isInteger(
+                participantIndex
+            )
+        ) {
+
+            activateParticipantByIndex(
+                participantIndex
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       ADD HUMAN MESSAGE
+    ========================================================== */
+
+    function addHumanMessage(text) {
+
+        if (!text) {
+
+            return;
+
+        }
+
+
+        clearEmptyFeed();
+
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+
+        message.className =
+            "message you";
+
+
+        const avatar =
+            document.createElement(
+                "div"
+            );
+
+
+        avatar.className =
+            "message-avatar";
+
+
+        avatar.innerHTML =
+            '<i class="bi bi-person"></i>';
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+
+        content.className =
+            "message-content";
+
+
+        const nameElement =
+            document.createElement(
+                "div"
+            );
+
+
+        nameElement.className =
+            "message-name";
+
+
+        nameElement.innerText =
+            discussionData &&
+            discussionData.human_name
+                ? discussionData.human_name
+                : "You";
+
+
+        const bubble =
+            document.createElement(
+                "div"
+            );
+
+
+        bubble.className =
+            "message-bubble";
+
+
+        bubble.innerText =
+            text;
+
+
+        content.appendChild(
+            nameElement
+        );
+
+
+        content.appendChild(
+            bubble
+        );
+
+
+        message.appendChild(
+            avatar
+        );
+
+
+        message.appendChild(
+            content
+        );
+
+
+        discussionFeed.appendChild(
+            message
+        );
+
+
+        scrollFeed();
+
+    }
+
+
+
+    /* =========================================================
+       TYPING INDICATOR
+    ========================================================== */
+
+    function showTypingIndicator() {
+
+        removeTypingIndicator();
+
+
+        const wrapper =
+            document.createElement(
+                "div"
+            );
+
+
+        wrapper.className =
+            "typing-message";
+
+
+        wrapper.id =
+            "typingIndicator";
+
+
+        const avatar =
+            document.createElement(
+                "div"
+            );
+
+
+        avatar.className =
+            "message-avatar";
+
+
+        avatar.innerHTML =
+            '<i class="bi bi-robot"></i>';
+
+
+        const bubble =
+            document.createElement(
+                "div"
+            );
+
+
+        bubble.className =
+            "typing-bubble";
+
+
+        const dots =
+            document.createElement(
+                "div"
+            );
+
+
+        dots.className =
+            "typing-dots";
+
+
+        for (
+            let i = 0;
+            i < 3;
+            i++
+        ) {
+
+            const dot =
+                document.createElement(
+                    "span"
+                );
+
+
+            dot.className =
+                "typing-dot";
+
+
+            dots.appendChild(
+                dot
+            );
+
+        }
+
+
+        bubble.appendChild(
+            dots
+        );
+
+
+        wrapper.appendChild(
+            avatar
+        );
+
+
+        wrapper.appendChild(
+            bubble
+        );
+
+
+        discussionFeed.appendChild(
+            wrapper
+        );
+
+
+        scrollFeed();
+
+    }
+
+
+
+    function removeTypingIndicator() {
+
+        const element =
+            document.getElementById(
+                "typingIndicator"
+            );
+
+
+        if (element) {
+
+            element.remove();
+
+        }
+
+    }
+
+
+
+    /* =========================================================
        SPEECH RECOGNITION
-    ====================================================== */
+    ========================================================== */
 
     const SpeechRecognition =
         window.SpeechRecognition ||
@@ -1502,70 +2840,17 @@
             new SpeechRecognition();
 
 
-        recognition.continuous = true;
-
-        recognition.interimResults = true;
-
-        recognition.lang = "en-US";
+        recognition.continuous =
+            true;
 
 
-        /* -------------------------------------------------
-           SPEECH RESULT
-        ------------------------------------------------- */
-
-        recognition.onresult =
-            function(event) {
-
-                let interimText = "";
+        recognition.interimResults =
+            true;
 
 
-                for (
-                    let i = event.resultIndex;
-                    i < event.results.length;
-                    i++
-                ) {
+        recognition.lang =
+            "en-US";
 
-                    const text =
-                        event.results[i][0].transcript;
-
-
-                    if (
-                        event.results[i].isFinal
-                    ) {
-
-                        currentHumanSpeech +=
-                            text + " ";
-
-                    }
-                    else {
-
-                        interimText += text;
-
-                    }
-
-                }
-
-
-                /*
-                 * Nothing is displayed.
-                 *
-                 * Speech is stored internally.
-                 */
-
-                console.log(
-                    "Human speech:",
-                    (
-                        currentHumanSpeech +
-                        interimText
-                    ).trim()
-                );
-
-            };
-
-
-        /* -------------------------------------------------
-           START LISTENING
-        ------------------------------------------------- */
 
         recognition.onstart =
             function() {
@@ -1582,25 +2867,78 @@
                     "bi bi-stop-fill";
 
 
-                voiceStatus.innerText =
-                    "Listening... Speak now.";
-
-
-                voiceStatus.classList.add(
-                    "listening"
+                setVoiceStatus(
+                    "Listening... Speak now.",
+                    true
                 );
 
 
-                activateParticipant(
-                    "participant-human"
+                activateHuman();
+
+
+                transcriptBox.classList.add(
+                    "show"
                 );
 
             };
 
 
-        /* -------------------------------------------------
-           STOP LISTENING
-        ------------------------------------------------- */
+        recognition.onresult =
+            function(event) {
+
+                let interimText = "";
+
+
+                for (
+                    let i = event.resultIndex;
+                    i < event.results.length;
+                    i++
+                ) {
+
+                    const result =
+                        event.results[i];
+
+
+                    const text =
+                        result[0]
+                            .transcript;
+
+
+                    if (
+                        result.isFinal
+                    ) {
+
+                        currentSpeech +=
+                            text + " ";
+
+                    }
+                    else {
+
+                        interimText +=
+                            text;
+
+                    }
+
+                }
+
+
+                interimSpeech =
+                    interimText;
+
+
+                const displayText =
+                    (
+                        currentSpeech +
+                        interimSpeech
+                    ).trim();
+
+
+                transcriptText.innerText =
+                    displayText ||
+                    "Listening...";
+
+            };
+
 
         recognition.onend =
             function() {
@@ -1617,35 +2955,21 @@
                     "bi bi-mic-fill";
 
 
-                voiceStatus.classList.remove(
-                    "listening"
-                );
+                if (!discussionEnded) {
 
-
-                deactivateParticipants();
-
-
-                if (
-                    !discussionEnded &&
-                    discussionStarted
-                ) {
-
-                    voiceStatus.innerText =
-                        "Your turn has ended.";
+                    transcriptBox.classList.remove(
+                        "show"
+                    );
 
                 }
 
             };
 
 
-        /* -------------------------------------------------
-           ERROR
-        ------------------------------------------------- */
-
         recognition.onerror =
             function(event) {
 
-                console.log(
+                console.error(
                     "Speech recognition error:",
                     event.error
                 );
@@ -1668,14 +2992,26 @@
                     "not-allowed"
                 ) {
 
-                    voiceStatus.innerText =
-                        "Microphone permission was denied.";
+                    setVoiceStatus(
+                        "Microphone permission was denied."
+                    );
+
+                }
+                else if (
+                    event.error ===
+                    "no-speech"
+                ) {
+
+                    setVoiceStatus(
+                        "No speech detected. Try again."
+                    );
 
                 }
                 else {
 
-                    voiceStatus.innerText =
-                        "Unable to recognize speech.";
+                    setVoiceStatus(
+                        "Unable to recognize speech."
+                    );
 
                 }
 
@@ -1685,314 +3021,24 @@
 
 
 
-    /* =====================================================
-       PREPARATION COUNTDOWN
-    ====================================================== */
-
-    function startPreparation() {
-
-        preparationTime = 10;
-
-        prepNumber.innerText =
-            preparationTime;
-
-
-        preparationInterval =
-            setInterval(
-                function() {
-
-                    preparationTime--;
-
-
-                    prepNumber.innerText =
-                        preparationTime;
-
-
-                    if (
-                        preparationTime <= 0
-                    ) {
-
-                        clearInterval(
-                            preparationInterval
-                        );
-
-
-                        startDiscussion();
-
-                    }
-
-                },
-                1000
-            );
-
-    }
-
-
-
-    /* =====================================================
-       HUMAN CAN START EARLY
-    ====================================================== */
-
-    startSpeakingButton.addEventListener(
-        "click",
-        function() {
-
-            clearInterval(
-                preparationInterval
-            );
-
-
-            startDiscussion();
-
-        }
-    );
-
-
-
-    /* =====================================================
-       START DISCUSSION
-    ====================================================== */
-
-    function startDiscussion() {
-
-        if (discussionStarted) {
-
-            return;
-
-        }
-
-
-        discussionStarted = true;
-
-
-        preparationOverlay.style.display =
-            "none";
-
-
-        liveStatus.innerText =
-            "Live";
-
-
-        liveStatus.className =
-            "badge text-bg-success ms-2";
-
-
-        voiceStatus.innerText =
-            "AI is starting the discussion...";
-
-
-        micButton.disabled = false;
-
-
-        startDiscussionTimer();
-
-
-        /*
-         * AI starts speaking automatically.
-         */
-
-        setTimeout(
-            function() {
-
-                speakAI(
-                    aiParticipants[0]
-                );
-
-            },
-            700
-        );
-
-    }
-
-
-
-    /* =====================================================
-       AI SPEAKS
-    ====================================================== */
-
-    function speakAI(participant) {
-
-        if (discussionEnded) {
-
-            return;
-
-        }
-
-
-        stopListening();
-
-
-        deactivateParticipants();
-
-
-        activateParticipant(
-            "participant-" +
-            (currentAI + 1)
-        );
-
-
-        aiSpeakingIndicator.classList.add(
-            "show"
-        );
-
-
-        voiceStatus.innerText =
-            participant.name +
-            " is speaking...";
-
-
-        /*
-         * Add visual message.
-         */
-
-        addAIMessage(
-            participant.name,
-            participant.message
-        );
-
-
-        /*
-         * Computer voice.
-         */
-
-        window.speechSynthesis.cancel();
-
-
-        const speech =
-            new SpeechSynthesisUtterance(
-                participant.message
-            );
-
-
-        speech.lang =
-            "en-US";
-
-
-        speech.rate =
-            0.9;
-
-
-        speech.pitch =
-            1;
-
-
-        speech.volume =
-            1;
-
-
-        speech.onend =
-            function() {
-
-                aiSpeakingIndicator.classList.remove(
-                    "show"
-                );
-
-
-                deactivateParticipants();
-
-
-                /*
-                 * After AI speaks,
-                 * human gets the microphone.
-                 */
-
-                startHumanTurn();
-
-            };
-
-
-        speech.onerror =
-            function() {
-
-                aiSpeakingIndicator.classList.remove(
-                    "show"
-                );
-
-
-                deactivateParticipants();
-
-
-                startHumanTurn();
-
-            };
-
-
-        window.speechSynthesis.speak(
-            speech
-        );
-
-    }
-
-
-
-    /* =====================================================
-       HUMAN TURN
-    ====================================================== */
-
-    function startHumanTurn() {
-
-        if (discussionEnded) {
-
-            return;
-
-        }
-
-
-        currentHumanSpeech = "";
-
-
-        voiceStatus.innerText =
-            "Your turn. Speak now.";
-
-
-        micButton.disabled = false;
-
-
-        /*
-         * Automatically activate microphone.
-         */
-
-        startListening();
-
-
-        /*
-         * Human gets approximately
-         * 15 seconds to speak.
-         */
-
-        setTimeout(
-            function() {
-
-                if (
-                    isListening &&
-                    !discussionEnded
-                ) {
-
-                    stopListening();
-
-
-                    processHumanResponse();
-
-                }
-
-            },
-            15000
-        );
-
-    }
-
-
-
-    /* =====================================================
-       START MICROPHONE
-    ====================================================== */
+    /* =========================================================
+       START LISTENING
+    ========================================================== */
 
     function startListening() {
 
+        if (discussionEnded) {
+
+            return;
+
+        }
+
+
         if (!recognition) {
 
-            voiceStatus.innerText =
-                "Speech recognition is not supported in this browser.";
+            setVoiceStatus(
+                "Speech recognition is not supported. Please use Chrome or Edge."
+            );
 
             return;
 
@@ -2006,6 +3052,15 @@
         }
 
 
+        currentSpeech = "";
+
+        interimSpeech = "";
+
+
+        transcriptText.innerText =
+            "Listening...";
+
+
         try {
 
             recognition.start();
@@ -2015,7 +3070,8 @@
         catch (error) {
 
             console.log(
-                "Recognition could not start."
+                "Recognition could not start.",
+                error
             );
 
         }
@@ -2024,9 +3080,9 @@
 
 
 
-    /* =====================================================
-       STOP MICROPHONE
-    ====================================================== */
+    /* =========================================================
+       STOP LISTENING
+    ========================================================== */
 
     function stopListening() {
 
@@ -2067,17 +3123,405 @@
 
 
 
-    /* =====================================================
+    /* =========================================================
+       AI TEXT TO SPEECH
+    ========================================================== */
+
+    function speakText(
+        text,
+        participantIndex,
+        participantName
+    ) {
+
+        return new Promise(
+            function(resolve) {
+
+                speechGeneration++;
+
+                const generation =
+                    speechGeneration;
+
+
+                aiSpeakingIndicator.classList.add(
+                    "show"
+                );
+
+
+                setVoiceStatus(
+                    participantName +
+                    " is speaking..."
+                );
+
+
+                activateParticipantByIndex(
+                    participantIndex
+                );
+
+
+                if (
+                    !window.speechSynthesis
+                ) {
+
+                    aiSpeakingIndicator.classList.remove(
+                        "show"
+                    );
+
+
+                    resolve();
+
+                    return;
+
+                }
+
+
+                window.speechSynthesis.cancel();
+
+
+                const utterance =
+                    new SpeechSynthesisUtterance(
+                        text
+                    );
+
+
+                utterance.lang =
+                    "en-US";
+
+
+                utterance.rate =
+                    0.92;
+
+
+                utterance.pitch =
+                    1;
+
+
+                utterance.volume =
+                    1;
+
+
+                utterance.onend =
+                    function() {
+
+                        if (
+                            generation !==
+                            speechGeneration
+                        ) {
+
+                            resolve();
+
+                            return;
+
+                        }
+
+
+                        aiSpeakingIndicator.classList.remove(
+                            "show"
+                        );
+
+
+                        resolve();
+
+                    };
+
+
+                utterance.onerror =
+                    function() {
+
+                        aiSpeakingIndicator.classList.remove(
+                            "show"
+                        );
+
+
+                        resolve();
+
+                    };
+
+
+                window.speechSynthesis.speak(
+                    utterance
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       START PREPARATION
+    ========================================================== */
+
+    function startPreparation() {
+
+        preparationTime = 10;
+
+
+        prepNumber.innerText =
+            preparationTime;
+
+
+        preparationInterval =
+            setInterval(
+                function() {
+
+                    preparationTime--;
+
+
+                    prepNumber.innerText =
+                        preparationTime;
+
+
+                    if (
+                        preparationTime <= 0
+                    ) {
+
+                        clearInterval(
+                            preparationInterval
+                        );
+
+
+                        startDiscussion();
+
+                    }
+
+                },
+                1000
+            );
+
+    }
+
+
+
+    /* =========================================================
+       USER STARTS EARLY
+    ========================================================== */
+
+    startSpeakingButton.addEventListener(
+        "click",
+        function() {
+
+            clearInterval(
+                preparationInterval
+            );
+
+
+            startDiscussion();
+
+        }
+    );
+
+
+
+    /* =========================================================
+       START DISCUSSION
+    ========================================================== */
+
+    async function startDiscussion() {
+
+        if (
+            discussionStarted ||
+            discussionEnded
+        ) {
+
+            return;
+
+        }
+
+
+        discussionStarted = true;
+
+
+        preparationOverlay.style.display =
+            "none";
+
+
+        liveStatus.innerText =
+            "Live";
+
+
+        liveStatus.className =
+            "badge text-bg-success ms-2";
+
+
+        turnLabel.innerText =
+            "AI opening statements";
+
+
+        micButton.disabled = true;
+
+
+        setVoiceStatus(
+            "The AI participants are starting the discussion..."
+        );
+
+
+        startDiscussionTimer();
+
+
+        /*
+         * The backend generates the seven opening
+         * statements when the session is created.
+         */
+
+        const participants =
+            discussionData &&
+            discussionData.participants
+                ? discussionData.participants
+                : [];
+
+
+        for (
+            let i = 0;
+            i < participants.length;
+            i++
+        ) {
+
+            if (discussionEnded) {
+
+                return;
+
+            }
+
+
+            const participant =
+                participants[i];
+
+
+            const message =
+                participant.message ||
+                participant.content ||
+                "";
+
+
+            if (!message) {
+
+                continue;
+
+            }
+
+
+            addAIMessage(
+                participant.name,
+                message,
+                i
+            );
+
+
+            await speakText(
+                message,
+                i,
+                participant.name
+            );
+
+
+            deactivateParticipants();
+
+
+            await wait(
+                600
+            );
+
+        }
+
+
+        if (!discussionEnded) {
+
+            startHumanTurn();
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       WAIT
+    ========================================================== */
+
+    function wait(milliseconds) {
+
+        return new Promise(
+            function(resolve) {
+
+                setTimeout(
+                    resolve,
+                    milliseconds
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       HUMAN TURN
+    ========================================================== */
+
+    function startHumanTurn() {
+
+        if (discussionEnded) {
+
+            return;
+
+        }
+
+
+        processingResponse =
+            false;
+
+
+        currentSpeech = "";
+
+        interimSpeech = "";
+
+
+        turnLabel.innerText =
+            "Your turn";
+
+
+        setVoiceStatus(
+            "Your turn. Speak now."
+        );
+
+
+        micButton.disabled =
+            false;
+
+
+        activateHuman();
+
+
+        startListening();
+
+    }
+
+
+
+    /* =========================================================
        MICROPHONE BUTTON
-    ====================================================== */
+    ========================================================== */
 
     micButton.addEventListener(
         "click",
         function() {
 
+            if (
+                discussionEnded ||
+                processingResponse
+            ) {
+
+                return;
+
+            }
+
+
             if (isListening) {
 
                 stopListening();
+
 
                 processHumanResponse();
 
@@ -2093,264 +3537,288 @@
 
 
 
-    /* =====================================================
+    /* =========================================================
        PROCESS HUMAN RESPONSE
-    ====================================================== */
+    ========================================================== */
 
-    function processHumanResponse() {
+    async function processHumanResponse() {
 
-        if (discussionEnded) {
+        if (
+            discussionEnded ||
+            processingResponse
+        ) {
 
             return;
 
         }
 
 
+        processingResponse = true;
+
+
         stopListening();
 
 
-        /*
-         * Store speech internally.
-         *
-         * Later this will be sent to Flask/NLP.
-         */
+        transcriptBox.classList.remove(
+            "show"
+        );
+
 
         const answer =
-            currentHumanSpeech.trim();
+            (
+                currentSpeech +
+                interimSpeech
+            ).trim();
 
 
-        console.log(
-            "Human response:",
+        if (!answer) {
+
+            processingResponse =
+                false;
+
+
+            setVoiceStatus(
+                "I didn't hear an answer. Please try again."
+            );
+
+
+            micButton.disabled =
+                false;
+
+
+            return;
+
+        }
+
+
+        addHumanMessage(
             answer
         );
 
 
-        /*
-         * For the current prototype,
-         * display the spoken response visually
-         * in the discussion history.
-         *
-         * If you want STRICT voice-only UI,
-         * this function can simply skip addHumanMessage().
-         */
-
-        if (answer) {
-
-            addHumanMessage(
-                answer
-            );
-
-        }
-
-
-        /*
-         * Move to next AI.
-         */
-
-        currentAI++;
-
-
-        if (
-            currentAI <
-            aiParticipants.length
-        ) {
-
-            setTimeout(
-                function() {
-
-                    speakAI(
-                        aiParticipants[currentAI]
-                    );
-
-                },
-                1200
-            );
-
-        }
-
-        else {
-
-            /*
-             * AI participants completed.
-             */
-
-            endDiscussion();
-
-        }
-
-    }
-
-
-
-    /* =====================================================
-       ADD AI MESSAGE
-    ====================================================== */
-
-    function addAIMessage(
-        name,
-        text
-    ) {
-
-        const message =
-            document.createElement(
-                "div"
-            );
-
-
-        message.className =
-            "message";
-
-
-        message.innerHTML = `
-
-            <div class="message-avatar">
-
-                <i class="bi bi-robot"></i>
-
-            </div>
-
-
-            <div class="message-content">
-
-                <div class="message-name">
-
-                    ${name}
-
-                </div>
-
-
-                <div class="message-bubble">
-
-                    ${text}
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        discussionFeed.appendChild(
-            message
-        );
-
-
-        discussionFeed.scrollTop =
-            discussionFeed.scrollHeight;
-
-    }
-
-
-
-    /* =====================================================
-       ADD HUMAN MESSAGE
-    ====================================================== */
-
-    function addHumanMessage(text) {
-
-        const message =
-            document.createElement(
-                "div"
-            );
-
-
-        message.className =
-            "message you";
-
-
-        message.innerHTML = `
-
-            <div class="message-avatar">
-
-                <i class="bi bi-person"></i>
-
-            </div>
-
-
-            <div class="message-content">
-
-                <div class="message-name">
-
-                    You
-
-                </div>
-
-
-                <div class="message-bubble">
-
-                    ${text}
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        discussionFeed.appendChild(
-            message
-        );
-
-
-        discussionFeed.scrollTop =
-            discussionFeed.scrollHeight;
-
-    }
-
-
-
-    /* =====================================================
-       PARTICIPANT ACTIVE STATE
-    ====================================================== */
-
-    function activateParticipant(id) {
-
         deactivateParticipants();
 
 
-        const element =
-            document.getElementById(id);
+        micButton.disabled =
+            true;
 
 
-        if (element) {
+        turnLabel.innerText =
+            "AI is responding";
 
-            element.classList.add(
-                "active"
+
+        setVoiceStatus(
+            "The AI participants are considering your point..."
+        );
+
+
+        showTypingIndicator();
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/group-discussion/" +
+                    encodeURIComponent(
+                        discussionId
+                    ) +
+                    "/next",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            message: answer
+                        })
+                    }
+                );
+
+
+            removeTypingIndicator();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "AI response failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                data.error
+            ) {
+
+                throw new Error(
+                    data.error
+                );
+
+            }
+
+
+            const participant =
+                data.participant ||
+                {};
+
+
+            const message =
+                data.message ||
+                data.response ||
+                "";
+
+
+            const participantIndex =
+                findParticipantIndex(
+                    participant
+                );
+
+
+            addAIMessage(
+                participant.name ||
+                "AI Participant",
+                message,
+                participantIndex
             );
+
+
+            await speakText(
+                message,
+                participantIndex,
+                participant.name ||
+                "AI Participant"
+            );
+
+
+            deactivateParticipants();
+
+
+            await wait(
+                500
+            );
+
+
+            if (!discussionEnded) {
+
+                startHumanTurn();
+
+            }
 
         }
 
-    }
+        catch (error) {
+
+            console.error(error);
 
 
+            removeTypingIndicator();
 
-    function deactivateParticipants() {
 
-        document
-            .querySelectorAll(
-                ".participant-card"
-            )
-            .forEach(
-                function(card) {
-
-                    card.classList.remove(
-                        "active"
-                    );
-
-                }
+            setVoiceStatus(
+                "The AI could not respond. Please try again."
             );
 
+
+            micButton.disabled =
+                false;
+
+
+            processingResponse =
+                false;
+
+
+            return;
+
+        }
+
+
+        processingResponse =
+            false;
+
     }
 
 
 
-    /* =====================================================
+    /* =========================================================
+       FIND PARTICIPANT INDEX
+    ========================================================== */
+
+    function findParticipantIndex(
+        participant
+    ) {
+
+        if (
+            !discussionData ||
+            !discussionData.participants
+        ) {
+
+            return 0;
+
+        }
+
+
+        const participants =
+            discussionData.participants;
+
+
+        const participantName =
+            String(
+                participant.name || ""
+            ).toLowerCase();
+
+
+        for (
+            let i = 0;
+            i < participants.length;
+            i++
+        ) {
+
+            const name =
+                String(
+                    participants[i].name ||
+                    ""
+                ).toLowerCase();
+
+
+            if (
+                name ===
+                participantName
+            ) {
+
+                return i;
+
+            }
+
+        }
+
+
+        return 0;
+
+    }
+
+
+
+    /* =========================================================
        DISCUSSION TIMER
-    ====================================================== */
+    ========================================================== */
 
     function startDiscussionTimer() {
 
-        discussionSeconds = 600;
+        clearInterval(
+            discussionInterval
+        );
+
+
+        updateTimer();
 
 
         discussionInterval =
@@ -2360,39 +3828,7 @@
                     discussionSeconds--;
 
 
-                    const minutes =
-                        Math.floor(
-                            discussionSeconds /
-                            60
-                        );
-
-
-                    const seconds =
-                        discussionSeconds %
-                        60;
-
-
-                    discussionTimer.innerText =
-
-                        String(
-                            minutes
-                        ).padStart(
-                            2,
-                            "0"
-                        )
-
-                        +
-
-                        ":"
-
-                        +
-
-                        String(
-                            seconds
-                        ).padStart(
-                            2,
-                            "0"
-                        );
+                    updateTimer();
 
 
                     if (
@@ -2404,7 +3840,7 @@
                         );
 
 
-                        endDiscussion();
+                        finishDiscussion();
 
                     }
 
@@ -2416,20 +3852,109 @@
 
 
 
-    /* =====================================================
-       END DISCUSSION
-    ====================================================== */
+    function updateTimer() {
 
-    function endDiscussion() {
+        const minutes =
+            Math.floor(
+                discussionSeconds / 60
+            );
 
-        if (discussionEnded) {
+
+        const seconds =
+            discussionSeconds % 60;
+
+
+        discussionTimer.innerText =
+            String(minutes)
+                .padStart(2, "0") +
+            ":" +
+            String(seconds)
+                .padStart(2, "0");
+
+
+        timerContainer.classList.remove(
+            "warning",
+            "danger"
+        );
+
+
+        if (
+            discussionSeconds <= 60
+        ) {
+
+            timerContainer.classList.add(
+                "danger"
+            );
+
+        }
+        else if (
+            discussionSeconds <= 180
+        ) {
+
+            timerContainer.classList.add(
+                "warning"
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       END BUTTON
+    ========================================================== */
+
+    endButton.addEventListener(
+        "click",
+        function() {
+
+            if (discussionEnded) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                window.confirm(
+                    "Are you sure you want to end the discussion?"
+                );
+
+
+            if (confirmed) {
+
+                finishDiscussion();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================================
+       FINISH DISCUSSION
+    ========================================================== */
+
+    async function finishDiscussion() {
+
+        if (
+            finishRequested ||
+            discussionEnded
+        ) {
 
             return;
 
         }
 
 
-        discussionEnded = true;
+        finishRequested =
+            true;
+
+
+        discussionEnded =
+            true;
 
 
         clearInterval(
@@ -2445,14 +3970,118 @@
         stopListening();
 
 
-        window.speechSynthesis.cancel();
+        speechGeneration++;
+
+
+        if (
+            window.speechSynthesis
+        ) {
+
+            window.speechSynthesis.cancel();
+
+        }
+
+
+        aiSpeakingIndicator.classList.remove(
+            "show"
+        );
 
 
         deactivateParticipants();
 
 
-        micButton.disabled = true;
+        micButton.disabled =
+            true;
 
+
+        liveStatus.innerText =
+            "Analyzing";
+
+
+        liveStatus.className =
+            "badge text-bg-warning ms-2";
+
+
+        turnLabel.innerText =
+            "Performance analysis";
+
+
+        setVoiceStatus(
+            "Analyzing your discussion performance..."
+        );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/group-discussion/" +
+                    encodeURIComponent(
+                        discussionId
+                    ) +
+                    "/finish",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Performance analysis failed."
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            showResult(
+                result
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+
+            liveStatus.innerText =
+                "Completed";
+
+
+            liveStatus.className =
+                "badge text-bg-secondary ms-2";
+
+
+            setVoiceStatus(
+                "Discussion completed, but performance analysis could not be loaded."
+            );
+
+
+            finishRequested =
+                false;
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       SHOW RESULT
+    ========================================================== */
+
+    function showResult(result) {
 
         liveStatus.innerText =
             "Completed";
@@ -2462,41 +4091,260 @@
             "badge text-bg-secondary ms-2";
 
 
-        voiceStatus.innerText =
-            "Discussion completed.";
+        setVoiceStatus(
+            "Discussion completed. Your performance has been analyzed."
+        );
 
 
-        /*
-         * Later:
-         *
-         * AI/NLP analysis
-         * ↓
-         * Performance score
-         * ↓
-         * Feedback
-         */
+        setScore(
+            "overallScore",
+            result.overall_score
+        );
 
-        setTimeout(
-            function() {
 
-                alert(
-                    "Discussion completed. Performance analysis will be available soon."
+        setScore(
+            "communicationScore",
+            result.communication_score
+        );
+
+
+        setScore(
+            "relevanceScore",
+            result.relevance_score
+        );
+
+
+        setScore(
+            "clarityScore",
+            result.clarity_score
+        );
+
+
+        setScore(
+            "argumentScore",
+            result.argument_score
+        );
+
+
+        renderList(
+            "strengthsList",
+            result.strengths
+        );
+
+
+        renderList(
+            "weaknessesList",
+            result.weaknesses
+        );
+
+
+        renderList(
+            "recommendationsList",
+            result.recommendations
+        );
+
+
+        document.getElementById(
+            "resultSummary"
+        ).innerText =
+            result.summary ||
+            "No summary was generated.";
+
+
+        const modalElement =
+            document.getElementById(
+                "resultModal"
+            );
+
+
+        const modal =
+            bootstrap.Modal.getOrCreateInstance(
+                modalElement
+            );
+
+
+        modal.show();
+
+    }
+
+
+
+    /* =========================================================
+       SCORE
+    ========================================================== */
+
+    function setScore(
+        elementId,
+        value
+    ) {
+
+        const element =
+            document.getElementById(
+                elementId
+            );
+
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        const numericValue =
+            Number(value);
+
+
+        if (
+            Number.isFinite(
+                numericValue
+            )
+        ) {
+
+            element.innerText =
+                Math.round(
+                    numericValue
+                ) +
+                "/100";
+
+        }
+        else {
+
+            element.innerText =
+                "--";
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       FEEDBACK LIST
+    ========================================================== */
+
+    function renderList(
+        elementId,
+        items
+    ) {
+
+        const list =
+            document.getElementById(
+                elementId
+            );
+
+
+        if (!list) {
+
+            return;
+
+        }
+
+
+        list.innerHTML = "";
+
+
+        if (
+            !Array.isArray(items) ||
+            items.length === 0
+        ) {
+
+            const item =
+                document.createElement(
+                    "li"
                 );
 
-            },
-            500
+
+            item.innerText =
+                "No specific feedback was generated.";
+
+
+            list.appendChild(
+                item
+            );
+
+
+            return;
+
+        }
+
+
+        items.forEach(
+            function(text) {
+
+                const item =
+                    document.createElement(
+                        "li"
+                    );
+
+
+                item.innerText =
+                    text;
+
+
+                list.appendChild(
+                    item
+                );
+
+            }
         );
 
     }
 
 
 
-    /* =====================================================
-       START
-    ====================================================== */
+    /* =========================================================
+       PAGE CLEANUP
+    ========================================================== */
 
-    startPreparation();
+    window.addEventListener(
+        "beforeunload",
+        function() {
 
+            if (
+                window.speechSynthesis
+            ) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+
+            clearInterval(
+                discussionInterval
+            );
+
+
+            clearInterval(
+                preparationInterval
+            );
+
+        }
+    );
+
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================== */
+
+    async function initialize() {
+
+        await loadDiscussion();
+
+
+        if (
+            discussionData
+        ) {
+
+            startPreparation();
+
+        }
+
+    }
+
+
+    initialize();
 
 </script>
 
