@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Interview | CareerForge AI</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(139, 92, 246, 0.16), transparent 30%),
+                #080b16;
+            color: #ffffff;
+        }
+
+        .navbar {
+            background: rgba(8, 11, 22, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-ai {
+            color: #8b5cf6;
+        }
+
+        .main-container {
+            min-height: calc(100vh - 73px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .upload-wrapper {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading .badge {
+            padding: 9px 15px;
+            border-radius: 50px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            color: #c4b5fd;
+            font-weight: 600;
+        }
+
+        .heading h1 {
+            margin-top: 18px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .heading h1 span {
+            background: linear-gradient(
+                90deg,
+                #8b5cf6,
+                #6366f1,
+                #22d3ee
+            );
+            --webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            max-width: 650px;
+            margin: 15px auto 0;
+            color: #a8afc2;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .upload-card {
+            padding: 35px;
+            border-radius: 28px;
+            background: rgba(18, 22, 38, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(20px);
+        }
+
+        .upload-zone {
+            position: relative;
+            border: 2px dashed rgba(139, 92, 246, 0.45);
+            border-radius: 22px;
+            padding: 55px 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.25s ease;
+            background: rgba(139, 92, 246, 0.04);
+        }
+
+        .upload-zone:hover {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .upload-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #4f46e5
+            );
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+        }
+
+        .upload-icon i {
+            font-size: 2rem;
+        }
+
+        .upload-zone h4 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .upload-zone p {
+            margin: 0;
+            color: #8e96aa;
+        }
+
+        .file-name {
+            margin-top: 15px;
+            color: #c4b5fd;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-label {
+            color: #d7dbea;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 14px;
+            padding: 13px 15px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+        }
+
+        .form-control::placeholder {
+            color: #70788d;
+        }
+
+        .form-select {
+            background-color: #151a2b;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-select option {
+            background: #151a2b;
+            color: #ffffff;
+        }
+
+        .start-btn {
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            background: linear-gradient(
+                90deg,
+                #7c3aed,
+                #4f46e5
+            );
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+            transition: 0.25s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 35px rgba(99, 102, 241, 0.35);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .info-item {
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+
+        .info-item i {
+            font-size: 1.4rem;
+            color: #a78bfa;
+        }
+
+        .info-item strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .info-item small {
+            color: #7f879b;
+        }
+
+        .alert {
+            border-radius: 15px;
+        }
+
+        @media (max-width: 700px) {
+            .upload-card {
+                padding: 22px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .upload-zone {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a
+            class="navbar-brand"
+            href="{{ url_for('index') }}"
+        >
+            <i class="bi bi-stars me-2"></i>
+            CareerForge <span class="brand-ai">AI</span>
+        </a>
+
+        <a
+            href="{{ url_for('index') }}"
+            class="btn btn-outline-light btn-sm rounded-pill px-3"
+        >
+            <i class="bi bi-arrow-left me-1"></i>
+            Home
+        </a>
+    </div>
+</nav>
+
+<main class="main-container">
+
+    <div class="upload-wrapper">
+
+        <div class="heading">
+
+            <span class="badge">
+                <i class="bi bi-mic-fill me-1"></i>
+                AI-Powered Interview
+            </span>
+
+            <h1>
+                Let AI <span>Interview You</span>
+            </h1>
+
+            <p>
+                Upload your resume and CareerForge AI will analyze your
+                background, projects, skills and experience to create a
+                personalized interview.
+            </p>
+
+        </div>
+
+        <div class="upload-card">
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form
+                method="POST"
+                action="{{ url_for('interview_upload') }}"
+                enctype="multipart/form-data"
+                id="interviewForm"
+            >
+
+                <label
+                    for="resume"
+                    class="upload-zone"
+                    id="uploadZone"
+                >
+
+                    <div class="upload-icon">
+                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </div>
+
+                    <h4>
+                        Upload your Resume
+                    </h4>
+
+                    <p>
+                        Click here to select your PDF resume
+                    </p>
+
+                    <div
+                        class="file-name"
+                        id="fileName"
+                    ></div>
+
+                    <input
+                        type="file"
+                        id="resume"
+                        name="resume"
+                        accept=".pdf,application/pdf"
+                        hidden
+                        required
+                    >
+
+                </label>
+
+                <div class="mt-4">
+
+                    <label
+                        for="target_role"
+                        class="form-label"
+                    >
+                        Target Job Role
+                        <span class="text-secondary">
+                            (Optional)
+                        </span>
+                    </label>
+
+                    <select
+                        class="form-select"
+                        id="target_role"
+                        name="target_role"
+                    >
+
+                        <option value="">
+                            Let AI determine from my resume
+                        </option>
+
+                        <option value="Software Developer">
+                            Software Developer
+                        </option>
+
+                        <option value="Full Stack Developer">
+                            Full Stack Developer
+                        </option>
+
+                        <option value="Frontend Developer">
+                            Frontend Developer
+                        </option>
+
+                        <option value="Backend Developer">
+                            Backend Developer
+                        </option>
+
+                        <option value="Python Developer">
+                            Python Developer
+                        </option>
+
+                        <option value="Java Developer">
+                            Java Developer
+                        </option>
+
+                        <option value="AI/ML Engineer">
+                            AI / ML Engineer
+                        </option>
+
+                        <option value="Data Scientist">
+                            Data Scientist
+                        </option>
+
+                        <option value="Data Analyst">
+                            Data Analyst
+                        </option>
+
+                        <option value="Mobile App Developer">
+                            Mobile App Developer
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="start-btn mt-4"
+                    id="startButton"
+                >
+                    <i class="bi bi-stars me-2"></i>
+                    Analyze Resume & Start AI Interview
+                </button>
+
+            </form>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+                    <i class="bi bi-file-text"></i>
+                    <strong>Resume Analysis</strong>
+                    <small>AI reads your resume</small>
+                </div>
+
+                <div class="info-item">
+                    <i class="bi bi-chat-square-dots"></i>
+                    <strong>Adaptive Questions</strong>
+                    <small>Questions change with answers</small>
+                </div>
+
+                <div class="info-item">
+                    <i class="bi bi-mic"></i>
+                    <strong>Voice Interview</strong>
+                    <small>Answer using your voice</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+    const resumeInput = document.getElementById("resume");
+    const fileName = document.getElementById("fileName");
+    const uploadZone = document.getElementById("uploadZone");
+    const interviewForm = document.getElementById("interviewForm");
+    const startButton = document.getElementById("startButton");
+
+    resumeInput.addEventListener("change", function () {
+
+        if (this.files.length > 0) {
+
+            const file = this.files[0];
+
+            fileName.textContent =
+                "Selected: " + file.name;
+
+            fileName.style.display = "block";
+
+            uploadZone.style.borderColor =
+                "#8b5cf6";
+        }
+
+    });
+
+    interviewForm.addEventListener("submit", function () {
+
+        startButton.disabled = true;
+
+        startButton.innerHTML =
+            '<span class="spinner-border spinner-border-sm me-2"></span>' +
+            'Analyzing Resume...';
+
+    });
+</script>
+
+</body>
+</html>

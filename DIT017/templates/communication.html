@@ -1,0 +1,2794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Communication Test | CareerForge AI</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(99, 102, 241, 0.12), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.10), transparent 35%),
+                #f8fafc;
+            color: #1e293b;
+        }
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #0f172a;
+        }
+
+        .nav-link {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            color: #4f46e5;
+        }
+
+        /* ==============================
+           PAGE HEADER
+        ============================== */
+
+        .page-header {
+            padding: 55px 0 25px;
+            text-align: center;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            max-width: 650px;
+            margin: auto;
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+
+        /* ==============================
+           MODE SELECTION
+        ============================== */
+
+        .mode-section {
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        .mode-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 25px 20px;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            border-color: #a5b4fc;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .mode-card.active {
+            border-color: #4f46e5;
+            background: linear-gradient(
+                145deg,
+                #eef2ff,
+                #ffffff
+            );
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        }
+
+        .mode-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+
+        .mode-card h5 {
+            font-weight: 750;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .mode-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .active-check {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: #4f46e5;
+            color: white;
+        }
+
+        .mode-card.active .active-check {
+            display: flex;
+        }
+
+        /* ==============================
+           TEST CONTAINER
+        ============================== */
+
+        .test-container {
+            background: white;
+            border-radius: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .test-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .test-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .test-title-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 1.3rem;
+        }
+
+        .test-title h4 {
+            margin: 0;
+            font-weight: 750;
+            color: #0f172a;
+        }
+
+        .test-title small {
+            color: #64748b;
+        }
+
+        .progress-info {
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .progress-info span {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .progress {
+            height: 7px;
+            border-radius: 20px;
+            background: #e2e8f0;
+            margin-top: 7px;
+        }
+
+        .progress-bar {
+            background: #4f46e5;
+            border-radius: 20px;
+        }
+
+        /* ==============================
+           TEST BODY
+        ============================== */
+
+        .test-body {
+            padding: 45px 30px;
+            text-align: center;
+            min-height: 500px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #94a3b8;
+        }
+
+        .status-speaking .status-dot {
+            background: #4f46e5;
+            animation: pulse 1s infinite;
+        }
+
+        .status-listening .status-dot {
+            background: #ef4444;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.6);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ==============================
+           AI ORB
+        ============================== */
+
+        .ai-orb-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 30px;
+        }
+
+        .ai-orb {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 35% 30%, #818cf8, #4f46e5 55%, #312e81);
+            color: white;
+            font-size: 3rem;
+            box-shadow:
+                0 0 0 15px rgba(79, 70, 229, 0.08),
+                0 0 0 30px rgba(79, 70, 229, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .ai-orb.speaking {
+            animation: orbSpeaking 1.2s infinite;
+        }
+
+        @keyframes orbSpeaking {
+
+            0% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 0 15px rgba(79, 70, 229, 0.08),
+                    0 0 0 30px rgba(79, 70, 229, 0.04);
+            }
+
+            50% {
+                transform: scale(1.08);
+                box-shadow:
+                    0 0 0 25px rgba(79, 70, 229, 0.10),
+                    0 0 0 45px rgba(79, 70, 229, 0.04);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 0 15px rgba(79, 70, 229, 0.08),
+                    0 0 0 30px rgba(79, 70, 229, 0.04);
+            }
+        }
+
+        /* ==============================
+           INSTRUCTION
+        ============================== */
+
+        .instruction-title {
+            font-size: 1.5rem;
+            font-weight: 750;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .instruction-text {
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        /* ==============================
+           READING PASSAGE
+        ============================== */
+
+        .reading-box {
+            max-width: 750px;
+            margin: 0 auto 30px;
+            padding: 28px;
+            border-radius: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .reading-label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #4f46e5;
+            margin-bottom: 12px;
+        }
+
+        .reading-text {
+            color: #334155;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* ==============================
+           MICROPHONE
+        ============================== */
+
+        .mic-wrapper {
+            margin-top: 25px;
+        }
+
+        .mic-button {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: none;
+            background: #4f46e5;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 12px 25px rgba(79, 70, 229, 0.3);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .mic-button:hover {
+            transform: scale(1.06);
+            background: #4338ca;
+        }
+
+        .mic-button.recording {
+            background: #ef4444;
+            box-shadow:
+                0 0 0 12px rgba(239, 68, 68, 0.12),
+                0 0 0 25px rgba(239, 68, 68, 0.05);
+            animation: micPulse 1.3s infinite;
+        }
+
+        @keyframes micPulse {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .mic-label {
+            margin-top: 14px;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* ==============================
+           TIMER
+        ============================== */
+
+        .timer {
+            margin-top: 20px;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .timer.warning {
+            color: #ef4444;
+        }
+
+        /* ==============================
+           HIDDEN TRANSCRIPT
+        ============================== */
+
+        .hidden-transcript {
+            display: none !important;
+        }
+
+        /* ==============================
+           START BUTTON
+        ============================== */
+
+        .start-btn {
+            border: none;
+            border-radius: 12px;
+            padding: 13px 28px;
+            background: #4f46e5;
+            color: white;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .start-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        /* ==============================
+           EVALUATING
+        ============================== */
+
+        .evaluating {
+            display: none;
+        }
+
+        .spinner-ring {
+            width: 70px;
+            height: 70px;
+            border: 6px solid #e0e7ff;
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 25px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ==============================
+           RESULTS
+        ============================== */
+
+        #resultsSection {
+            display: none;
+        }
+
+        .result-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .result-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #ecfdf5;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+        }
+
+        .result-header h2 {
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .result-header p {
+            color: #64748b;
+        }
+
+        .overall-score {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            margin: 25px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #eef2ff;
+            border: 10px solid #c7d2fe;
+        }
+
+        .overall-score strong {
+            font-size: 2.6rem;
+            font-weight: 850;
+            color: #4f46e5;
+        }
+
+        .overall-score span {
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .score-item {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .score-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .score-top strong {
+            color: #334155;
+        }
+
+        .score-value {
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+        .recommendation {
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 16px;
+            background: #eef2ff;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .recommendation h5 {
+            font-weight: 750;
+            color: #312e81;
+        }
+
+        .recommendation p {
+            color: #475569;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .try-again-btn {
+            border: 2px solid #4f46e5;
+            background: white;
+            color: #4f46e5;
+            border-radius: 12px;
+            padding: 12px 25px;
+            font-weight: 700;
+        }
+
+        .try-again-btn:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        /* ==============================
+           BROWSER WARNING
+        ============================== */
+
+        .browser-warning {
+            display: none;
+            margin: 20px auto;
+            max-width: 650px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            font-size: 0.9rem;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 768px) {
+
+            .page-header {
+                padding-top: 35px;
+            }
+
+            .test-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .progress-info {
+                width: 100%;
+                text-align: left;
+            }
+
+            .test-body {
+                padding: 35px 18px;
+            }
+
+            .result-card {
+                padding: 25px 18px;
+            }
+
+            .ai-orb {
+                width: 115px;
+                height: 115px;
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a href="{{ url_for('index') }}" class="brand">
+            CareerForge <span>AI</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('resume') }}">
+                        Resume Tester
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('communication') }}">
+                        Communication
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('interview_setup') }}">
+                        Interview
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ============================================================
+     PAGE HEADER
+============================================================ -->
+
+<section class="page-header">
+
+    <div class="container">
+
+        <div class="page-badge">
+            <i class="bi bi-mic-fill"></i>
+            AI Communication Assessment
+        </div>
+
+        <h1>
+            Speak. Practice. Improve.
+        </h1>
+
+        <p>
+            Practice your communication skills with an AI that listens,
+            speaks, and evaluates your performance.
+        </p>
+
+        <div class="browser-warning" id="browserWarning">
+
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+            Voice recognition is best supported in
+            <strong>Google Chrome or Microsoft Edge</strong>.
+            Please allow microphone access when prompted.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ============================================================
+     MODE SELECTION
+============================================================ -->
+
+<section class="mode-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- READ ALOUD -->
+
+            <div class="col-lg-4">
+
+                <div
+                    class="mode-card active"
+                    id="modeRead"
+                    onclick="selectMode('read')"
+                >
+
+                    <div class="active-check">
+                        <i class="bi bi-check"></i>
+                    </div>
+
+                    <div class="mode-icon">
+                        <i class="bi bi-book-half"></i>
+                    </div>
+
+                    <h5>
+                        Read Aloud
+                    </h5>
+
+                    <p>
+                        Read the displayed passage aloud.
+                        AI evaluates your pronunciation,
+                        fluency, pace, and clarity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- LISTEN AND REPEAT -->
+
+            <div class="col-lg-4">
+
+                <div
+                    class="mode-card"
+                    id="modeRepeat"
+                    onclick="selectMode('repeat')"
+                >
+
+                    <div class="active-check">
+                        <i class="bi bi-check"></i>
+                    </div>
+
+                    <div class="mode-icon">
+                        <i class="bi bi-headphones"></i>
+                    </div>
+
+                    <h5>
+                        Listen & Repeat
+                    </h5>
+
+                    <p>
+                        Listen carefully while AI speaks.
+                        Then repeat exactly what you heard.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- LISTEN AND ANSWER -->
+
+            <div class="col-lg-4">
+
+                <div
+                    class="mode-card"
+                    id="modeAnswer"
+                    onclick="selectMode('answer')"
+                >
+
+                    <div class="active-check">
+                        <i class="bi bi-check"></i>
+                    </div>
+
+                    <div class="mode-icon">
+                        <i class="bi bi-chat-square-text"></i>
+                    </div>
+
+                    <h5>
+                        Listen & Answer
+                    </h5>
+
+                    <p>
+                        Listen to an AI passage and question,
+                        then answer naturally using your voice.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ============================================================
+     TEST CONTAINER
+============================================================ -->
+
+<div class="container">
+
+    <div class="test-container">
+
+        <!-- TEST HEADER -->
+
+        <div class="test-header">
+
+            <div class="test-title">
+
+                <div class="test-title-icon">
+                    <i class="bi bi-soundwave"></i>
+                </div>
+
+                <div>
+
+                    <h4 id="testModeTitle">
+                        Read Aloud
+                    </h4>
+
+                    <small id="testModeDescription">
+                        Read the passage clearly and naturally.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-info">
+
+                <span id="questionProgress">
+                    Question 1 of 3
+                </span>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                        style="width: 33%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TEST BODY -->
+
+        <div class="test-body" id="testBody">
+
+
+            <!-- STATUS -->
+
+            <div
+                class="status-badge"
+                id="statusBadge"
+            >
+
+                <span class="status-dot"></span>
+
+                <span id="statusText">
+                    Ready to begin
+                </span>
+
+            </div>
+
+
+            <!-- AI ORB -->
+
+            <div class="ai-orb-wrapper">
+
+                <div
+                    class="ai-orb"
+                    id="aiOrb"
+                >
+
+                    <i class="bi bi-robot"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- INSTRUCTION -->
+
+            <h3
+                class="instruction-title"
+                id="instructionTitle"
+            >
+                Ready for your communication test?
+            </h3>
+
+            <p
+                class="instruction-text"
+                id="instructionText"
+            >
+                Select a practice mode above and start the test.
+                Your microphone will be used to capture your spoken response.
+            </p>
+
+
+            <!-- READING PASSAGE -->
+
+            <div
+                class="reading-box"
+                id="readingBox"
+                style="display: none;"
+            >
+
+                <div class="reading-label">
+                    <i class="bi bi-book me-1"></i>
+                    Read this passage aloud
+                </div>
+
+                <p
+                    class="reading-text"
+                    id="readingText"
+                ></p>
+
+            </div>
+
+
+            <!-- START BUTTON -->
+
+            <button
+                class="start-btn"
+                id="startButton"
+                onclick="startTest()"
+            >
+
+                <i class="bi bi-play-fill me-1"></i>
+
+                Start Test
+
+            </button>
+
+
+            <!-- MICROPHONE -->
+
+            <div
+                class="mic-wrapper"
+                id="micWrapper"
+                style="display: none;"
+            >
+
+                <button
+                    class="mic-button"
+                    id="micButton"
+                    onclick="toggleRecording()"
+                    title="Start speaking"
+                >
+
+                    <i
+                        class="bi bi-mic-fill"
+                        id="micIcon"
+                    ></i>
+
+                </button>
+
+                <div
+                    class="mic-label"
+                    id="micLabel"
+                >
+                    Click the microphone and speak
+                </div>
+
+                <div
+                    class="timer"
+                    id="timer"
+                >
+                    00:15
+                </div>
+
+            </div>
+
+
+            <!-- HIDDEN TRANSCRIPT -->
+
+            <div
+                class="hidden-transcript"
+                id="hiddenTranscript"
+            ></div>
+
+
+            <!-- EVALUATING -->
+
+            <div
+                class="evaluating"
+                id="evaluating"
+            >
+
+                <div class="spinner-ring"></div>
+
+                <h4 class="fw-bold">
+                    AI is evaluating your response...
+                </h4>
+
+                <p class="text-muted">
+                    Analyzing pronunciation, fluency,
+                    accuracy and communication.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         RESULTS
+    ======================================================== -->
+
+    <section id="resultsSection">
+
+        <div class="result-card">
+
+            <div class="result-header">
+
+                <div class="result-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+
+                <h2>
+                    Communication Test Complete
+                </h2>
+
+                <p>
+                    Here is your AI-generated communication assessment.
+                </p>
+
+                <div class="overall-score">
+
+                    <strong id="overallScore">
+                        0%
+                    </strong>
+
+                    <span>
+                        OVERALL
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-lg-6">
+
+                    <div class="score-item">
+
+                        <div class="score-top">
+
+                            <strong>
+                                Pronunciation
+                            </strong>
+
+                            <span
+                                class="score-value"
+                                id="pronunciationScore"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                id="pronunciationBar"
+                                style="width: 0%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-item">
+
+                        <div class="score-top">
+
+                            <strong>
+                                Fluency
+                            </strong>
+
+                            <span
+                                class="score-value"
+                                id="fluencyScore"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                id="fluencyBar"
+                                style="width: 0%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="score-item">
+
+                        <div class="score-top">
+
+                            <strong>
+                                Accuracy
+                            </strong>
+
+                            <span
+                                class="score-value"
+                                id="accuracyScore"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                id="accuracyBar"
+                                style="width: 0%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-item">
+
+                        <div class="score-top">
+
+                            <strong>
+                                Clarity
+                            </strong>
+
+                            <span
+                                class="score-value"
+                                id="clarityScore"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                id="clarityBar"
+                                style="width: 0%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECOMMENDATION -->
+
+            <div class="recommendation">
+
+                <h5>
+                    <i class="bi bi-stars me-2"></i>
+                    AI Recommendation
+                </h5>
+
+                <p id="recommendationText">
+                    Your communication performance will appear here.
+                </p>
+
+            </div>
+
+
+            <div class="text-center mt-4">
+
+                <button
+                    class="try-again-btn"
+                    onclick="resetTest()"
+                >
+
+                    <i class="bi bi-arrow-repeat me-1"></i>
+
+                    Try Again
+
+                </button>
+
+                <a
+                    href="{{ url_for('index') }}"
+                    class="btn btn-primary ms-2"
+                    style="
+                        background:#4f46e5;
+                        border-color:#4f46e5;
+                        border-radius:12px;
+                        padding:12px 25px;
+                        font-weight:700;
+                    "
+                >
+
+                    <i class="bi bi-house me-1"></i>
+
+                    Back to CareerForge
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+
+<script>
+
+    /* ============================================================
+       DATA
+    ============================================================ */
+
+    const testData = {
+
+        read: [
+
+            {
+                text:
+                    "Effective communication is one of the most important skills in the workplace. It helps professionals express ideas clearly, collaborate with teams, and build strong relationships."
+            },
+
+            {
+                text:
+                    "Successful professionals communicate with confidence and clarity. They listen carefully, explain their ideas logically, and adapt their communication style to different situations."
+            },
+
+            {
+                text:
+                    "Technology is changing the modern workplace rapidly. Students who develop both technical knowledge and strong communication skills can create better opportunities for their careers."
+            }
+
+        ],
+
+
+        repeat: [
+
+            "Successful professionals communicate their ideas clearly and confidently.",
+
+            "Continuous practice helps students improve their communication skills.",
+
+            "Artificial intelligence can help students prepare for real world interviews."
+
+        ],
+
+
+        answer: [
+
+            {
+                passage:
+                    "Remote work has become increasingly common in many industries. It allows employees to work from different locations and provides greater flexibility. However, remote workers also need strong communication and time management skills.",
+
+                question:
+                    "What are two important skills mentioned in the passage?"
+            },
+
+            {
+                passage:
+                    "Artificial intelligence is changing many industries. Some repetitive tasks can be automated, while new roles are being created around AI systems. Students can benefit by learning how to work effectively with AI tools.",
+
+                question:
+                    "How can students benefit from artificial intelligence?"
+            },
+
+            {
+                passage:
+                    "Teamwork is important in professional environments because employees often need to solve problems together. Good teamwork requires communication, listening, respect, and the ability to understand different perspectives.",
+
+                question:
+                    "Name two qualities required for good teamwork."
+            }
+
+        ]
+
+    };
+
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+
+    let currentMode = "read";
+
+    let currentQuestion = 0;
+
+    let isRecording = false;
+
+    let recognition = null;
+
+    let currentTranscript = "";
+
+    let timerInterval = null;
+
+    let remainingSeconds = 15;
+
+    let testStarted = false;
+
+
+    /* ============================================================
+       MODE INFORMATION
+    ============================================================ */
+
+    const modeInformation = {
+
+        read: {
+
+            title: "Read Aloud",
+
+            description:
+                "Read the displayed passage clearly and naturally.",
+
+            instruction:
+                "Read the passage aloud when you are ready.",
+
+            icon:
+                "bi-book-half"
+
+        },
+
+        repeat: {
+
+            title: "Listen & Repeat",
+
+            description:
+                "Listen carefully and repeat what the AI says.",
+
+            instruction:
+                "Listen carefully. The text will not be displayed.",
+
+            icon:
+                "bi-headphones"
+
+        },
+
+        answer: {
+
+            title: "Listen & Answer",
+
+            description:
+                "Listen to the passage and answer the AI question.",
+
+            instruction:
+                "Listen carefully to the passage and question.",
+
+            icon:
+                "bi-chat-square-text"
+
+        }
+
+    };
+
+
+    /* ============================================================
+       SELECT MODE
+    ============================================================ */
+
+    function selectMode(mode) {
+
+        if (testStarted) {
+            return;
+        }
+
+        currentMode = mode;
+
+        document
+            .querySelectorAll(".mode-card")
+            .forEach(card => card.classList.remove("active"));
+
+        if (mode === "read") {
+            document
+                .getElementById("modeRead")
+                .classList.add("active");
+        }
+
+        if (mode === "repeat") {
+            document
+                .getElementById("modeRepeat")
+                .classList.add("active");
+        }
+
+        if (mode === "answer") {
+            document
+                .getElementById("modeAnswer")
+                .classList.add("active");
+        }
+
+        updateModeUI();
+
+    }
+
+
+    /* ============================================================
+       UPDATE MODE UI
+    ============================================================ */
+
+    function updateModeUI() {
+
+        const info = modeInformation[currentMode];
+
+        document.getElementById("testModeTitle").textContent =
+            info.title;
+
+        document.getElementById("testModeDescription").textContent =
+            info.description;
+
+        document.getElementById("instructionTitle").textContent =
+            info.instruction;
+
+        document.getElementById("startButton").style.display =
+            "inline-block";
+
+        document.getElementById("micWrapper").style.display =
+            "none";
+
+        document.getElementById("readingBox").style.display =
+            "none";
+
+        document.getElementById("evaluating").style.display =
+            "none";
+
+        document.getElementById("statusText").textContent =
+            "Ready to begin";
+
+        document.getElementById("statusBadge").className =
+            "status-badge";
+
+        document.getElementById("aiOrb").classList.remove("speaking");
+
+        updateProgress();
+
+    }
+
+
+    /* ============================================================
+       START TEST
+    ============================================================ */
+
+    function startTest() {
+
+        if (testStarted) {
+            return;
+        }
+
+        testStarted = true;
+
+        currentQuestion = 0;
+
+        document.getElementById("startButton").style.display =
+            "none";
+
+        document.getElementById("modeRead").style.pointerEvents =
+            "none";
+
+        document.getElementById("modeRepeat").style.pointerEvents =
+            "none";
+
+        document.getElementById("modeAnswer").style.pointerEvents =
+            "none";
+
+        runQuestion();
+
+    }
+
+
+    /* ============================================================
+       RUN QUESTION
+    ============================================================ */
+
+    function runQuestion() {
+
+        stopRecognition();
+
+        clearInterval(timerInterval);
+
+        currentTranscript = "";
+
+        updateProgress();
+
+        document.getElementById("micWrapper").style.display =
+            "none";
+
+        document.getElementById("evaluating").style.display =
+            "none";
+
+        document.getElementById("aiOrb").classList.remove("speaking");
+
+
+        /* READ ALOUD */
+
+        if (currentMode === "read") {
+
+            const item =
+                testData.read[currentQuestion];
+
+            document.getElementById("readingBox").style.display =
+                "block";
+
+            document.getElementById("readingText").textContent =
+                item.text;
+
+            document.getElementById("instructionTitle").textContent =
+                "Read the passage aloud";
+
+            document.getElementById("instructionText").textContent =
+                "Speak clearly and naturally. Your voice will be evaluated automatically.";
+
+            setStatus(
+                "Your turn to speak",
+                "listening"
+            );
+
+            showMicrophone();
+
+            return;
+        }
+
+
+        /* LISTEN & REPEAT */
+
+        if (currentMode === "repeat") {
+
+            document.getElementById("instructionTitle").textContent =
+                "Listen carefully";
+
+            document.getElementById("instructionText").textContent =
+                "The AI will speak a sentence. After it finishes, repeat exactly what you heard.";
+
+            setStatus(
+                "AI is speaking",
+                "speaking"
+            );
+
+            speakText(
+                testData.repeat[currentQuestion],
+                function () {
+
+                    setStatus(
+                        "Your turn to speak",
+                        "listening"
+                    );
+
+                    showMicrophone();
+
+                }
+            );
+
+            return;
+        }
+
+
+        /* LISTEN & ANSWER */
+
+        if (currentMode === "answer") {
+
+            const item =
+                testData.answer[currentQuestion];
+
+            document.getElementById("instructionTitle").textContent =
+                "Listen carefully";
+
+            document.getElementById("instructionText").textContent =
+                "The AI will read a passage and ask a question. Listen carefully and answer using your voice.";
+
+            setStatus(
+                "AI is speaking",
+                "speaking"
+            );
+
+            const speech =
+                item.passage +
+                " " +
+                item.question;
+
+            speakText(
+                speech,
+                function () {
+
+                    setStatus(
+                        "Your turn to answer",
+                        "listening"
+                    );
+
+                    showMicrophone();
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /* ============================================================
+       SHOW MICROPHONE
+    ============================================================ */
+
+    function showMicrophone() {
+
+        document.getElementById("micWrapper").style.display =
+            "block";
+
+        remainingSeconds = 15;
+
+        updateTimer();
+
+        setTimeout(() => {
+
+            startRecognition();
+
+        }, 500);
+
+    }
+
+
+    /* ============================================================
+       SPEECH SYNTHESIS
+    ============================================================ */
+
+    function speakText(text, callback) {
+
+        if (!("speechSynthesis" in window)) {
+
+            alert(
+                "Speech synthesis is not supported in this browser."
+            );
+
+            if (callback) {
+                callback();
+            }
+
+            return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance =
+            new SpeechSynthesisUtterance(text);
+
+        utterance.rate = 0.92;
+
+        utterance.pitch = 1;
+
+        utterance.volume = 1;
+
+        utterance.onstart = function () {
+
+            document
+                .getElementById("aiOrb")
+                .classList.add("speaking");
+
+            setStatus(
+                "AI is speaking",
+                "speaking"
+            );
+
+        };
+
+        utterance.onend = function () {
+
+            document
+                .getElementById("aiOrb")
+                .classList.remove("speaking");
+
+            if (callback) {
+                callback();
+            }
+
+        };
+
+        utterance.onerror = function () {
+
+            document
+                .getElementById("aiOrb")
+                .classList.remove("speaking");
+
+            if (callback) {
+                callback();
+            }
+
+        };
+
+        window.speechSynthesis.speak(utterance);
+
+    }
+
+
+    /* ============================================================
+       SPEECH RECOGNITION
+    ============================================================ */
+
+    function initializeRecognition() {
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+        if (!SpeechRecognition) {
+
+            document.getElementById("browserWarning").style.display =
+                "block";
+
+            return false;
+        }
+
+        recognition =
+            new SpeechRecognition();
+
+        recognition.lang =
+            "en-US";
+
+        recognition.continuous =
+            true;
+
+        recognition.interimResults =
+            true;
+
+        recognition.onstart = function () {
+
+            isRecording = true;
+
+            currentTranscript = "";
+
+            document
+                .getElementById("micButton")
+                .classList.add("recording");
+
+            document
+                .getElementById("micIcon")
+                .className =
+                "bi bi-stop-fill";
+
+            document
+                .getElementById("micLabel")
+                .textContent =
+                "Listening to you...";
+
+            setStatus(
+                "Listening to you",
+                "listening"
+            );
+
+            startTimer();
+
+        };
+
+
+        recognition.onresult = function(event) {
+
+            let finalText = "";
+
+            for (
+                let i = event.resultIndex;
+                i < event.results.length;
+                i++
+            ) {
+
+                const transcript =
+                    event.results[i][0].transcript;
+
+                if (event.results[i].isFinal) {
+
+                    finalText +=
+                        transcript + " ";
+
+                }
+
+            }
+
+            if (finalText.trim() !== "") {
+
+                currentTranscript +=
+                    finalText;
+
+            }
+
+            /*
+             * Transcript is intentionally NOT displayed.
+             * It is only stored internally for evaluation.
+             */
+
+            document.getElementById("hiddenTranscript").textContent =
+                currentTranscript;
+
+        };
+
+
+        recognition.onerror = function(event) {
+
+            console.log(
+                "Speech recognition error:",
+                event.error
+            );
+
+        };
+
+
+        recognition.onend = function() {
+
+            if (isRecording) {
+
+                try {
+
+                    recognition.start();
+
+                } catch (error) {
+
+                    console.log(error);
+
+                }
+
+            }
+
+        };
+
+        return true;
+
+    }
+
+
+    /* ============================================================
+       START RECOGNITION
+    ============================================================ */
+
+    function startRecognition() {
+
+        if (!recognition) {
+
+            const initialized =
+                initializeRecognition();
+
+            if (!initialized) {
+
+                alert(
+                    "Speech recognition is not supported. Please use Google Chrome or Microsoft Edge."
+                );
+
+                return;
+
+            }
+
+        }
+
+        if (isRecording) {
+            return;
+        }
+
+        try {
+
+            recognition.start();
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    }
+
+
+    /* ============================================================
+       STOP RECOGNITION
+    ============================================================ */
+
+    function stopRecognition() {
+
+        clearInterval(timerInterval);
+
+        isRecording = false;
+
+        if (recognition) {
+
+            try {
+                recognition.stop();
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+
+        document
+            .getElementById("micButton")
+            .classList.remove("recording");
+
+        document
+            .getElementById("micIcon")
+            .className =
+            "bi bi-mic-fill";
+
+        document
+            .getElementById("micLabel")
+            .textContent =
+            "Click the microphone and speak";
+
+    }
+
+
+    /* ============================================================
+       TOGGLE RECORDING
+    ============================================================ */
+
+    function toggleRecording() {
+
+        if (isRecording) {
+
+            finishResponse();
+
+        } else {
+
+            startRecognition();
+
+        }
+
+    }
+
+
+    /* ============================================================
+       TIMER
+    ============================================================ */
+
+    function startTimer() {
+
+        clearInterval(timerInterval);
+
+        remainingSeconds = 15;
+
+        updateTimer();
+
+        timerInterval =
+            setInterval(function() {
+
+                remainingSeconds--;
+
+                updateTimer();
+
+                if (remainingSeconds <= 0) {
+
+                    finishResponse();
+
+                }
+
+            }, 1000);
+
+    }
+
+
+    function updateTimer() {
+
+        const timer =
+            document.getElementById("timer");
+
+        const seconds =
+            String(remainingSeconds)
+                .padStart(2, "0");
+
+        timer.textContent =
+            "00:" + seconds;
+
+        if (remainingSeconds <= 5) {
+
+            timer.classList.add("warning");
+
+        } else {
+
+            timer.classList.remove("warning");
+
+        }
+
+    }
+
+
+    /* ============================================================
+       FINISH RESPONSE
+    ============================================================ */
+
+    function finishResponse() {
+
+        if (!isRecording) {
+            return;
+        }
+
+        stopRecognition();
+
+        setStatus(
+            "Response captured",
+            ""
+        );
+
+        document.getElementById("micWrapper").style.display =
+            "none";
+
+        document.getElementById("evaluating").style.display =
+            "block";
+
+        document.getElementById("aiOrb").classList.remove("speaking");
+
+        /*
+         * For now the evaluation is simulated locally.
+         * Later this transcript can be sent to Flask/AI models.
+         */
+
+        setTimeout(function() {
+
+            evaluateResponse();
+
+        }, 1500);
+
+    }
+
+
+    /* ============================================================
+       EVALUATE RESPONSE
+    ============================================================ */
+
+    function evaluateResponse() {
+
+        /*
+         * Current hackathon prototype:
+         * Generate evaluation from speech length and
+         * transcript similarity where applicable.
+         */
+
+        let scores;
+
+        if (currentMode === "read") {
+
+            scores = evaluateReadAloud();
+
+        } else if (currentMode === "repeat") {
+
+            scores = evaluateRepeat();
+
+        } else {
+
+            scores = evaluateAnswer();
+
+        }
+
+        storeScore(scores);
+
+        currentQuestion++;
+
+        if (
+            currentQuestion <
+            testData[currentMode].length
+        ) {
+
+            setTimeout(function() {
+
+                runQuestion();
+
+            }, 700);
+
+        } else {
+
+            setTimeout(function() {
+
+                showResults();
+
+            }, 700);
+
+        }
+
+    }
+
+
+    /* ============================================================
+       READ ALOUD EVALUATION
+    ============================================================ */
+
+    function evaluateReadAloud() {
+
+        const expected =
+            testData.read[currentQuestion].text;
+
+        const spoken =
+            currentTranscript.trim();
+
+        if (!spoken) {
+
+            return {
+                pronunciation: 45,
+                fluency: 40,
+                accuracy: 30,
+                clarity: 45
+            };
+
+        }
+
+        const accuracy =
+            similarityScore(
+                expected,
+                spoken
+            );
+
+        const words =
+            spoken.split(/\s+/).length;
+
+        const fluency =
+            Math.min(
+                95,
+                55 + words * 1.2
+            );
+
+        return {
+
+            pronunciation:
+                Math.round(
+                    Math.min(
+                        95,
+                        accuracy + 5
+                    )
+                ),
+
+            fluency:
+                Math.round(fluency),
+
+            accuracy:
+                Math.round(accuracy),
+
+            clarity:
+                Math.round(
+                    (accuracy + fluency) / 2
+                )
+
+        };
+
+    }
+
+
+    /* ============================================================
+       REPEAT EVALUATION
+    ============================================================ */
+
+    function evaluateRepeat() {
+
+        const expected =
+            testData.repeat[currentQuestion];
+
+        const spoken =
+            currentTranscript.trim();
+
+        if (!spoken) {
+
+            return {
+                pronunciation: 40,
+                fluency: 40,
+                accuracy: 25,
+                clarity: 40
+            };
+
+        }
+
+        const accuracy =
+            similarityScore(
+                expected,
+                spoken
+            );
+
+        const words =
+            spoken.split(/\s+/).length;
+
+        const fluency =
+            Math.min(
+                95,
+                55 + words * 1.5
+            );
+
+        return {
+
+            pronunciation:
+                Math.round(
+                    Math.min(
+                        95,
+                        accuracy + 4
+                    )
+                ),
+
+            fluency:
+                Math.round(fluency),
+
+            accuracy:
+                Math.round(accuracy),
+
+            clarity:
+                Math.round(
+                    (accuracy + fluency) / 2
+                )
+
+        };
+
+    }
+
+
+    /* ============================================================
+       ANSWER EVALUATION
+    ============================================================ */
+
+    function evaluateAnswer() {
+
+        const spoken =
+            currentTranscript.trim();
+
+        if (!spoken) {
+
+            return {
+                pronunciation: 40,
+                fluency: 35,
+                accuracy: 35,
+                clarity: 40
+            };
+
+        }
+
+        const words =
+            spoken.split(/\s+/).length;
+
+        /*
+         * For the current prototype, longer relevant
+         * answers receive a better communication score.
+         *
+         * Later:
+         * Sentence Transformers / LLM can evaluate
+         * semantic relevance.
+         */
+
+        const comprehension =
+            Math.min(
+                95,
+                55 + words * 2
+            );
+
+        const fluency =
+            Math.min(
+                95,
+                50 + words * 1.8
+            );
+
+        return {
+
+            pronunciation:
+                Math.round(
+                    Math.min(
+                        92,
+                        65 + words
+                    )
+                ),
+
+            fluency:
+                Math.round(fluency),
+
+            accuracy:
+                Math.round(comprehension),
+
+            clarity:
+                Math.round(
+                    (fluency + comprehension) / 2
+                )
+
+        };
+
+    }
+
+
+    /* ============================================================
+       TEXT SIMILARITY
+    ============================================================ */
+
+    function similarityScore(a, b) {
+
+        const normalize =
+            text =>
+                text
+                    .toLowerCase()
+                    .replace(/[^\w\s]/g, "")
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+        const expected =
+            normalize(a);
+
+        const spoken =
+            normalize(b);
+
+        if (
+            expected.length === 0 ||
+            spoken.length === 0
+        ) {
+            return 0;
+        }
+
+        let matched = 0;
+
+        expected.forEach(word => {
+
+            if (spoken.includes(word)) {
+                matched++;
+            }
+
+        });
+
+        const score =
+            (matched / expected.length) * 100;
+
+        return Math.min(
+            100,
+            Math.round(score)
+        );
+
+    }
+
+
+    /* ============================================================
+       SCORE STORAGE
+    ============================================================ */
+
+    let collectedScores = [];
+
+
+    function storeScore(score) {
+
+        collectedScores.push(score);
+
+    }
+
+
+    /* ============================================================
+       SHOW RESULTS
+    ============================================================ */
+
+    function showResults() {
+
+        document
+            .querySelector(".test-container")
+            .style.display = "none";
+
+        document
+            .getElementById("resultsSection")
+            .style.display = "block";
+
+        if (collectedScores.length === 0) {
+            return;
+        }
+
+        const average = key => {
+
+            const total =
+                collectedScores.reduce(
+                    (sum, score) =>
+                        sum + score[key],
+                    0
+                );
+
+            return Math.round(
+                total / collectedScores.length
+            );
+
+        };
+
+        const pronunciation =
+            average("pronunciation");
+
+        const fluency =
+            average("fluency");
+
+        const accuracy =
+            average("accuracy");
+
+        const clarity =
+            average("clarity");
+
+        const overall =
+            Math.round(
+                (
+                    pronunciation +
+                    fluency +
+                    accuracy +
+                    clarity
+                ) / 4
+            );
+
+        document.getElementById("overallScore").textContent =
+            overall + "%";
+
+        setScore(
+            "pronunciation",
+            pronunciation
+        );
+
+        setScore(
+            "fluency",
+            fluency
+        );
+
+        setScore(
+            "accuracy",
+            accuracy
+        );
+
+        setScore(
+            "clarity",
+            clarity
+        );
+
+
+        let recommendation = "";
+
+        if (overall >= 85) {
+
+            recommendation =
+                "Excellent communication performance. Your speaking is clear and confident. Continue practicing advanced interview questions and real-world discussions to maintain your performance.";
+
+        } else if (overall >= 70) {
+
+            recommendation =
+                "Good communication skills with room for improvement. Focus on speaking fluently, reducing unnecessary pauses, and expanding your vocabulary.";
+
+        } else {
+
+            recommendation =
+                "Keep practicing regularly. Focus first on pronunciation and fluency, then gradually work on vocabulary, clarity, and answering questions confidently.";
+
+        }
+
+        document.getElementById(
+            "recommendationText"
+        ).textContent =
+            recommendation;
+
+    }
+
+
+    /* ============================================================
+       SET SCORE
+    ============================================================ */
+
+    function setScore(name, value) {
+
+        document.getElementById(
+            name + "Score"
+        ).textContent =
+            value + "%";
+
+        document.getElementById(
+            name + "Bar"
+        ).style.width =
+            value + "%";
+
+    }
+
+
+    /* ============================================================
+       PROGRESS
+    ============================================================ */
+
+    function updateProgress() {
+
+        const total =
+            testData[currentMode].length;
+
+        const current =
+            currentQuestion + 1;
+
+        document.getElementById(
+            "questionProgress"
+        ).textContent =
+            "Question " +
+            current +
+            " of " +
+            total;
+
+        const percentage =
+            (current / total) * 100;
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            percentage + "%";
+
+    }
+
+
+    /* ============================================================
+       STATUS
+    ============================================================ */
+
+    function setStatus(text, type) {
+
+        const badge =
+            document.getElementById("statusBadge");
+
+        const statusText =
+            document.getElementById("statusText");
+
+        badge.className =
+            "status-badge";
+
+        if (type === "speaking") {
+
+            badge.classList.add(
+                "status-speaking"
+            );
+
+        }
+
+        if (type === "listening") {
+
+            badge.classList.add(
+                "status-listening"
+            );
+
+        }
+
+        statusText.textContent =
+            text;
+
+    }
+
+
+    /* ============================================================
+       RESET TEST
+    ============================================================ */
+
+    function resetTest() {
+
+        stopRecognition();
+
+        if ("speechSynthesis" in window) {
+            speechSynthesis.cancel();
+        }
+
+        clearInterval(timerInterval);
+
+        currentQuestion = 0;
+
+        currentTranscript = "";
+
+        collectedScores = [];
+
+        testStarted = false;
+
+        document
+            .querySelector(".test-container")
+            .style.display = "block";
+
+        document
+            .getElementById("resultsSection")
+            .style.display = "none";
+
+        document.getElementById("startButton").style.display =
+            "inline-block";
+
+        document.getElementById("micWrapper").style.display =
+            "none";
+
+        document.getElementById("evaluating").style.display =
+            "none";
+
+        document.getElementById("readingBox").style.display =
+            "none";
+
+        document
+            .querySelectorAll(".mode-card")
+            .forEach(card => {
+                card.style.pointerEvents = "auto";
+            });
+
+        updateModeUI();
+
+    }
+
+
+    /* ============================================================
+       BROWSER CHECK
+    ============================================================ */
+
+    window.addEventListener(
+        "load",
+        function() {
+
+            const SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+
+                document.getElementById(
+                    "browserWarning"
+                ).style.display = "block";
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       PAGE CLEANUP
+    ============================================================ */
+
+    window.addEventListener(
+        "beforeunload",
+        function() {
+
+            stopRecognition();
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>

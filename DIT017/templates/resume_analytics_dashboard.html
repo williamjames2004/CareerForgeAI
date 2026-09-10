@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Resume Analytics | CareerForge AI
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        body {
+            background: #f8f9fa;
+            color: #212529;
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #0d6efd;
+            color: #ffffff;
+
+            font-size: 21px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #495057 !important;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+        .dashboard-header {
+            padding: 55px 0 40px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(13, 110, 253, 0.10),
+                    transparent 35%
+                ),
+                #ffffff;
+        }
+
+        .badge-ai {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            background: #e7f1ff;
+            color: #0d6efd;
+
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .dashboard-header h1 {
+            margin-top: 18px;
+
+            font-size: 2.7rem;
+            font-weight: 800;
+        }
+
+        .dashboard-header p {
+            color: #6c757d;
+        }
+
+        .dashboard-section {
+            padding: 45px 0 80px;
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            height: 100%;
+        }
+
+        .score-card {
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 170px;
+            height: 170px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 12px solid #e7f1ff;
+        }
+
+        .score {
+            font-size: 2.8rem;
+            font-weight: 800;
+
+            color: #0d6efd;
+        }
+
+        .score-text {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+
+            border: 1px solid #e9ecef;
+
+            border-radius: 18px;
+
+            padding: 22px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #e7f1ff;
+
+            color: #0d6efd;
+
+            font-size: 22px;
+
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .skill-badge {
+            display: inline-block;
+
+            padding: 7px 11px;
+
+            margin: 4px;
+
+            border-radius: 20px;
+
+            background: #e9f7ef;
+
+            color: #198754;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .gap-badge {
+            background: #fff3cd;
+            color: #997404;
+        }
+
+        .recommendation {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            margin-bottom: 10px;
+
+            border-radius: 12px;
+
+            background: #f8f9fa;
+        }
+
+        .recommendation i {
+            color: #0d6efd;
+
+            font-size: 20px;
+        }
+
+        .resume-preview {
+            max-height: 400px;
+
+            overflow-y: auto;
+
+            padding: 20px;
+
+            background: #f8f9fa;
+
+            border-radius: 12px;
+
+            white-space: pre-wrap;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 25px 0;
+
+            background: #ffffff;
+
+            border-top: 1px solid #e9ecef;
+
+            color: #6c757d;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar sticky-top">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="{{ url_for('index') }}"
+        >
+
+            <span class="brand-icon">
+
+                <i class="bi bi-stars"></i>
+
+            </span>
+
+            CareerForge AI
+
+        </a>
+
+
+        <div>
+
+            <a
+                href="{{ url_for('index') }}"
+                class="btn btn-outline-primary"
+            >
+
+                <i class="bi bi-house me-1"></i>
+
+                Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<section class="dashboard-header text-center">
+
+    <div class="container">
+
+        <span class="badge-ai">
+
+            <i class="bi bi-stars"></i>
+
+            AI Resume Analytics
+
+        </span>
+
+        <h1>
+            Resume Analysis Dashboard
+        </h1>
+
+        <p class="lead mb-0">
+
+            AI-powered analysis for your
+            <strong>{{ analysis.job_role }}</strong>
+            target role.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="dashboard-section">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             SCORE + STATS
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+
+
+            <!-- MATCH SCORE -->
+
+            <div class="col-lg-4">
+
+                <div class="dashboard-card score-card">
+
+                    <h5 class="fw-bold mb-4">
+
+                        Resume Match Score
+
+                    </h5>
+
+                    <div class="score-circle">
+
+                        <span class="score">
+
+                            {{ analysis.match_score }}%
+
+                        </span>
+
+                        <span class="score-text">
+
+                            AI Match
+
+                        </span>
+
+                    </div>
+
+                    {% if analysis.match_score >= 80 %}
+
+                        <h4 class="fw-bold text-success">
+                            Excellent Match
+                        </h4>
+
+                    {% elif analysis.match_score >= 60 %}
+
+                        <h4 class="fw-bold text-primary">
+                            Good Match
+                        </h4>
+
+                    {% elif analysis.match_score >= 40 %}
+
+                        <h4 class="fw-bold text-warning">
+                            Moderate Match
+                        </h4>
+
+                    {% else %}
+
+                        <h4 class="fw-bold text-danger">
+                            Needs Improvement
+                        </h4>
+
+                    {% endif %}
+
+                    <p class="text-muted mb-0">
+
+                        Semantic similarity between your
+                        resume and the target job description.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SKILLS -->
+
+            <div class="col-lg-4">
+
+                <div class="dashboard-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-check2-circle"></i>
+
+                    </div>
+
+                    <h5 class="fw-bold">
+                        Skills Found
+                    </h5>
+
+                    <div class="stat-number text-success">
+
+                        {{ analysis.skills_found|length }}
+
+                    </div>
+
+                    <p class="text-muted">
+
+                        Relevant skills detected in your resume.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- GAPS -->
+
+            <div class="col-lg-4">
+
+                <div class="dashboard-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-exclamation-circle"></i>
+
+                    </div>
+
+                    <h5 class="fw-bold">
+                        Skill Gaps
+                    </h5>
+
+                    <div class="stat-number text-warning">
+
+                        {{ analysis.skill_gaps|length }}
+
+                    </div>
+
+                    <p class="text-muted">
+
+                        Job-related skills not detected in your resume.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SKILLS
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-lg-6">
+
+                <div class="dashboard-card">
+
+                    <h4 class="fw-bold mb-3">
+
+                        <i class="bi bi-check-circle text-success me-2"></i>
+
+                        Skills Detected
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Technologies and skills identified
+                        from your resume.
+
+                    </p>
+
+                    {% if analysis.skills_found %}
+
+                        {% for skill in analysis.skills_found %}
+
+                            <span class="skill-badge">
+
+                                {{ skill }}
+
+                            </span>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p class="text-muted">
+                            No predefined skills detected.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="dashboard-card">
+
+                    <h4 class="fw-bold mb-3">
+
+                        <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+
+                        Skill Gaps
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Skills from the job description
+                        that were not detected.
+
+                    </p>
+
+                    {% if analysis.skill_gaps %}
+
+                        {% for skill in analysis.skill_gaps %}
+
+                            <span class="skill-badge gap-badge">
+
+                                {{ skill }}
+
+                            </span>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="alert alert-success">
+
+                            <i class="bi bi-check-circle me-2"></i>
+
+                            No major skill gaps detected.
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RECOMMENDATIONS
+        ================================================= -->
+
+        <div class="dashboard-card mb-4">
+
+            <h4 class="fw-bold mb-3">
+
+                <i class="bi bi-lightbulb text-warning me-2"></i>
+
+                AI Improvement Recommendations
+
+            </h4>
+
+            <p class="text-muted">
+
+                CareerForge AI recommends the following
+                improvements based on your resume analysis.
+
+            </p>
+
+            {% for recommendation in analysis.recommendations %}
+
+                <div class="recommendation">
+
+                    <i class="bi bi-stars"></i>
+
+                    <span>
+
+                        {{ recommendation }}
+
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             EXTRACTED RESUME
+        ================================================= -->
+
+        <div class="dashboard-card mb-4">
+
+            <h4 class="fw-bold mb-3">
+
+                <i class="bi bi-file-earmark-text text-primary me-2"></i>
+
+                Extracted Resume Information
+
+            </h4>
+
+            <p class="text-muted">
+
+                Text successfully extracted from your uploaded PDF.
+
+            </p>
+
+            <div class="resume-preview">
+
+                {{ analysis.resume_text }}
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BACK BUTTON
+        ================================================= -->
+
+        <div class="text-center mt-4">
+
+            <a
+                href="{{ url_for('index') }}"
+                class="btn btn-primary btn-lg px-4"
+            >
+
+                <i class="bi bi-house me-2"></i>
+
+                Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container text-center">
+
+        <strong class="text-dark">
+
+            <i class="bi bi-stars me-1"></i>
+
+            CareerForge AI
+
+        </strong>
+
+        <div class="small mt-1">
+
+            AI-Powered Communication & Placement Trainer
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
