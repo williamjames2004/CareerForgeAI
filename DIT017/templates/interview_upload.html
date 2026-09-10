@@ -25,39 +25,52 @@
             min-height: 100vh;
             margin: 0;
             font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18), transparent 30%),
-                radial-gradient(circle at 85% 80%, rgba(139, 92, 246, 0.16), transparent 30%),
-                #080b16;
-            color: #ffffff;
+            background: #f6f7fb;
+            color: #1f2937;
         }
 
         .navbar {
-            background: rgba(8, 11, 22, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .navbar-brand {
             font-weight: 800;
             letter-spacing: -0.5px;
+            color: #111827 !important;
+        }
+
+        .navbar-brand i {
+            color: #7c3aed;
         }
 
         .brand-ai {
-            color: #8b5cf6;
+            color: #7c3aed;
+        }
+
+        .home-btn {
+            border: 1px solid #d1d5db;
+            color: #374151;
+            background: #ffffff;
+            transition: 0.2s ease;
+        }
+
+        .home-btn:hover {
+            background: #f3f4f6;
+            color: #111827;
+            border-color: #9ca3af;
         }
 
         .main-container {
             min-height: calc(100vh - 73px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
+            padding: 55px 20px 70px;
         }
 
         .upload-wrapper {
             width: 100%;
-            max-width: 850px;
+            max-width: 950px;
+            margin: 0 auto;
         }
 
         .heading {
@@ -65,160 +78,282 @@
             margin-bottom: 35px;
         }
 
-        .heading .badge {
-            padding: 9px 15px;
+        .heading-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 15px;
             border-radius: 50px;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.35);
-            color: #c4b5fd;
-            font-weight: 600;
+            background: #f3e8ff;
+            border: 1px solid #e9d5ff;
+            color: #7c3aed;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
         .heading h1 {
             margin-top: 18px;
-            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
             font-weight: 800;
             letter-spacing: -2px;
+            color: #111827;
         }
 
         .heading h1 span {
-            background: linear-gradient(
-                90deg,
-                #8b5cf6,
-                #6366f1,
-                #22d3ee
-            );
-            --webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #7c3aed;
         }
 
         .heading p {
-            max-width: 650px;
+            max-width: 680px;
             margin: 15px auto 0;
-            color: #a8afc2;
+            color: #6b7280;
             font-size: 1.05rem;
             line-height: 1.7;
         }
 
-        .upload-card {
+        .main-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 26px;
             padding: 35px;
-            border-radius: 28px;
-            background: rgba(18, 22, 38, 0.82);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+        }
+
+        .method-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .method-title h4 {
+            font-weight: 750;
+            color: #111827;
+            margin-bottom: 7px;
+        }
+
+        .method-title p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .method-card {
+            position: relative;
+            border: 2px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 28px;
+            cursor: pointer;
+            background: #ffffff;
+            transition: all 0.25s ease;
+        }
+
+        .method-card:hover {
+            border-color: #c4b5fd;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .method-card.active {
+            border-color: #7c3aed;
+            background: #faf7ff;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .method-card input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .method-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3e8ff;
+            color: #7c3aed;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+
+        .method-card h5 {
+            font-weight: 750;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .method-card p {
+            color: #6b7280;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .method-check {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d1d5db;
+            color: transparent;
+            transition: 0.2s ease;
+        }
+
+        .method-card.active .method-check {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: #ffffff;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: "";
+            height: 1px;
+            background: #e5e7eb;
+            flex: 1;
+        }
+
+        .section-divider span {
+            color: #9ca3af;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
         }
 
         .upload-zone {
             position: relative;
-            border: 2px dashed rgba(139, 92, 246, 0.45);
-            border-radius: 22px;
-            padding: 55px 25px;
+            border: 2px dashed #c4b5fd;
+            border-radius: 20px;
+            padding: 50px 25px;
             text-align: center;
             cursor: pointer;
+            background: #faf7ff;
             transition: 0.25s ease;
-            background: rgba(139, 92, 246, 0.04);
         }
 
         .upload-zone:hover {
-            border-color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.08);
-            transform: translateY(-2px);
+            border-color: #7c3aed;
+            background: #f7f2ff;
         }
 
         .upload-icon {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 20px;
-            border-radius: 22px;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(
-                135deg,
-                #7c3aed,
-                #4f46e5
-            );
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
-        }
-
-        .upload-icon i {
+            background: #ede9fe;
+            color: #7c3aed;
             font-size: 2rem;
         }
 
-        .upload-zone h4 {
-            font-weight: 700;
-            margin-bottom: 8px;
+        .upload-zone h5 {
+            color: #111827;
+            font-weight: 750;
+            margin-bottom: 7px;
         }
 
         .upload-zone p {
-            margin: 0;
-            color: #8e96aa;
+            color: #6b7280;
+            margin-bottom: 0;
         }
 
         .file-name {
             margin-top: 15px;
-            color: #c4b5fd;
-            font-weight: 600;
+            color: #7c3aed;
+            font-weight: 650;
             display: none;
         }
 
         .form-label {
-            color: #d7dbea;
-            font-weight: 600;
-            margin-bottom: 9px;
+            color: #374151;
+            font-weight: 650;
+            margin-bottom: 8px;
         }
 
-        .form-control {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border-radius: 14px;
-            padding: 13px 15px;
+        .required {
+            color: #ef4444;
         }
 
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.07);
-            color: #ffffff;
+        .form-control,
+        .form-select {
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #111827;
+            background: #ffffff;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: #8b5cf6;
-            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
         }
 
         .form-control::placeholder {
-            color: #70788d;
+            color: #9ca3af;
         }
 
-        .form-select {
-            background-color: #151a2b;
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.1);
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
         }
 
-        .form-select option {
-            background: #151a2b;
-            color: #ffffff;
+        .helper-text {
+            color: #9ca3af;
+            font-size: 0.82rem;
+            margin-top: 6px;
         }
 
         .start-btn {
             width: 100%;
             border: none;
-            border-radius: 15px;
+            border-radius: 14px;
             padding: 15px 20px;
-            font-weight: 700;
+            font-weight: 750;
             font-size: 1rem;
-            color: white;
-            background: linear-gradient(
-                90deg,
-                #7c3aed,
-                #4f46e5
-            );
-            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+            color: #ffffff;
+            background: linear-gradient(90deg, #7c3aed, #6366f1);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.22);
             transition: 0.25s ease;
         }
 
         .start-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 18px 35px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.28);
+        }
+
+        .start-btn:disabled {
+            opacity: 0.7;
+            transform: none;
+            cursor: not-allowed;
         }
 
         .info-grid {
@@ -231,33 +366,49 @@
         .info-item {
             padding: 18px;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #f9fafb;
+            border: 1px solid #eef0f3;
             text-align: center;
         }
 
         .info-item i {
-            font-size: 1.4rem;
-            color: #a78bfa;
+            font-size: 1.35rem;
+            color: #7c3aed;
         }
 
         .info-item strong {
             display: block;
             margin-top: 8px;
+            color: #374151;
             font-size: 0.9rem;
         }
 
         .info-item small {
-            color: #7f879b;
+            color: #9ca3af;
         }
 
         .alert {
-            border-radius: 15px;
+            border-radius: 14px;
+            border: none;
         }
 
-        @media (max-width: 700px) {
-            .upload-card {
+        .manual-note {
+            padding: 14px 16px;
+            background: #f5f3ff;
+            border: 1px solid #ddd6fe;
+            border-radius: 13px;
+            color: #5b21b6;
+            font-size: 0.88rem;
+            margin-bottom: 22px;
+        }
+
+        @media (max-width: 750px) {
+            .main-card {
                 padding: 22px;
+            }
+
+            .method-grid {
+                grid-template-columns: 1fr;
             }
 
             .info-grid {
@@ -273,8 +424,9 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
+
         <a
             class="navbar-brand"
             href="{{ url_for('index') }}"
@@ -285,11 +437,12 @@
 
         <a
             href="{{ url_for('index') }}"
-            class="btn btn-outline-light btn-sm rounded-pill px-3"
+            class="btn home-btn btn-sm rounded-pill px-3"
         >
             <i class="bi bi-arrow-left me-1"></i>
             Home
         </a>
+
     </div>
 </nav>
 
@@ -299,8 +452,8 @@
 
         <div class="heading">
 
-            <span class="badge">
-                <i class="bi bi-mic-fill me-1"></i>
+            <span class="heading-badge">
+                <i class="bi bi-mic-fill"></i>
                 AI-Powered Interview
             </span>
 
@@ -309,21 +462,95 @@
             </h1>
 
             <p>
-                Upload your resume and CareerForge AI will analyze your
-                background, projects, skills and experience to create a
-                personalized interview.
+                Give CareerForge AI some information about you.
+                Upload your resume or enter your important details
+                manually, and AI will create a personalized interview.
             </p>
 
         </div>
 
-        <div class="upload-card">
+        <div class="main-card">
 
             {% if error %}
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-4">
                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
                     {{ error }}
                 </div>
             {% endif %}
+
+            <div class="method-title">
+                <h4>How would you like to continue?</h4>
+                <p>
+                    Choose one option to provide your information.
+                </p>
+            </div>
+
+            <div class="method-grid">
+
+                <label
+                    class="method-card active"
+                    id="pdfMethod"
+                    for="pdfOption"
+                >
+                    <input
+                        type="radio"
+                        name="input_method"
+                        id="pdfOption"
+                        value="pdf"
+                        checked
+                    >
+
+                    <div class="method-check">
+                        <i class="bi bi-check"></i>
+                    </div>
+
+                    <div class="method-icon">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </div>
+
+                    <h5>Upload Resume</h5>
+
+                    <p>
+                        Upload your PDF resume and let AI automatically
+                        extract your name, skills, projects, experience
+                        and other relevant information.
+                    </p>
+                </label>
+
+                <label
+                    class="method-card"
+                    id="manualMethod"
+                    for="manualOption"
+                >
+                    <input
+                        type="radio"
+                        name="input_method"
+                        id="manualOption"
+                        value="manual"
+                    >
+
+                    <div class="method-check">
+                        <i class="bi bi-check"></i>
+                    </div>
+
+                    <div class="method-icon">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+
+                    <h5>Enter Details Manually</h5>
+
+                    <p>
+                        Don't have a resume? Enter your important
+                        information manually and AI will create your
+                        interview from your details.
+                    </p>
+                </label>
+
+            </div>
+
+            <div class="section-divider">
+                <span>YOUR INFORMATION</span>
+            </div>
 
             <form
                 method="POST"
@@ -332,56 +559,299 @@
                 id="interviewForm"
             >
 
-                <label
-                    for="resume"
-                    class="upload-zone"
-                    id="uploadZone"
+                <input
+                    type="hidden"
+                    name="input_method"
+                    id="inputMethod"
+                    value="pdf"
                 >
 
-                    <div class="upload-icon">
-                        <i class="bi bi-file-earmark-pdf-fill"></i>
-                    </div>
+                <!-- PDF SECTION -->
 
-                    <h4>
-                        Upload your Resume
-                    </h4>
-
-                    <p>
-                        Click here to select your PDF resume
-                    </p>
-
-                    <div
-                        class="file-name"
-                        id="fileName"
-                    ></div>
-
-                    <input
-                        type="file"
-                        id="resume"
-                        name="resume"
-                        accept=".pdf,application/pdf"
-                        hidden
-                        required
-                    >
-
-                </label>
-
-                <div class="mt-4">
+                <div
+                    class="form-section active"
+                    id="pdfSection"
+                >
 
                     <label
-                        for="target_role"
+                        for="resume"
+                        class="upload-zone"
+                        id="uploadZone"
+                    >
+
+                        <div class="upload-icon">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </div>
+
+                        <h5>
+                            Upload your Resume PDF
+                        </h5>
+
+                        <p>
+                            Click here to select your resume
+                        </p>
+
+                        <div
+                            class="file-name"
+                            id="fileName"
+                        ></div>
+
+                        <input
+                            type="file"
+                            id="resume"
+                            name="resume"
+                            accept=".pdf,application/pdf"
+                            hidden
+                        >
+
+                    </label>
+
+                    <div class="helper-text text-center">
+                        Maximum file size: 10 MB
+                    </div>
+
+                </div>
+
+                <!-- MANUAL SECTION -->
+
+                <div
+                    class="form-section"
+                    id="manualSection"
+                >
+
+                    <div class="manual-note">
+                        <i class="bi bi-stars me-2"></i>
+                        Enter the information you consider important.
+                        CareerForge AI will use it to personalize your
+                        interview questions.
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="name"
+                                class="form-label"
+                            >
+                                Full Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                name="name"
+                                placeholder="e.g. William James"
+                            >
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="email"
+                                class="form-label"
+                            >
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="e.g. william@example.com"
+                            >
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="phone"
+                                class="form-label"
+                            >
+                                Phone
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="phone"
+                                name="phone"
+                                placeholder="e.g. +91 9876543210"
+                            >
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="target_role"
+                                class="form-label"
+                            >
+                                Target Job Role
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="target_role"
+                                name="target_role"
+                            >
+
+                                <option value="">
+                                    Select target role
+                                </option>
+
+                                <option value="Software Developer">
+                                    Software Developer
+                                </option>
+
+                                <option value="Full Stack Developer">
+                                    Full Stack Developer
+                                </option>
+
+                                <option value="Frontend Developer">
+                                    Frontend Developer
+                                </option>
+
+                                <option value="Backend Developer">
+                                    Backend Developer
+                                </option>
+
+                                <option value="Python Developer">
+                                    Python Developer
+                                </option>
+
+                                <option value="Java Developer">
+                                    Java Developer
+                                </option>
+
+                                <option value="AI/ML Engineer">
+                                    AI / ML Engineer
+                                </option>
+
+                                <option value="Data Scientist">
+                                    Data Scientist
+                                </option>
+
+                                <option value="Data Analyst">
+                                    Data Analyst
+                                </option>
+
+                                <option value="Mobile App Developer">
+                                    Mobile App Developer
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="profile"
+                                class="form-label"
+                            >
+                                About Yourself
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="profile"
+                                name="profile"
+                                placeholder="Tell us briefly about yourself, your education, interests, career goals, etc."
+                            ></textarea>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="skills"
+                                class="form-label"
+                            >
+                                Skills & Technologies
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="skills"
+                                name="skills"
+                                placeholder="e.g. Python, Flask, HTML, CSS, JavaScript, Machine Learning, Flutter"
+                            ></textarea>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="projects"
+                                class="form-label"
+                            >
+                                Important Projects
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="projects"
+                                name="projects"
+                                placeholder="Describe your important projects, technologies used and your contribution."
+                            ></textarea>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="experience"
+                                class="form-label"
+                            >
+                                Experience
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="experience"
+                                name="experience"
+                                placeholder="Internships, work experience, freelance work, hackathons, etc."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- TARGET ROLE FOR PDF -->
+
+                <div
+                    class="mt-4"
+                    id="pdfRoleSection"
+                >
+
+                    <label
+                        for="pdf_target_role"
                         class="form-label"
                     >
                         Target Job Role
-                        <span class="text-secondary">
+                        <span class="text-secondary fw-normal">
                             (Optional)
                         </span>
                     </label>
 
                     <select
                         class="form-select"
-                        id="target_role"
-                        name="target_role"
+                        id="pdf_target_role"
+                        name="target_role_pdf"
                     >
 
                         <option value="">
@@ -447,20 +917,32 @@
 
                 <div class="info-item">
                     <i class="bi bi-file-text"></i>
-                    <strong>Resume Analysis</strong>
-                    <small>AI reads your resume</small>
+
+                    <strong>AI Profile Analysis</strong>
+
+                    <small>
+                        AI understands your profile
+                    </small>
                 </div>
 
                 <div class="info-item">
                     <i class="bi bi-chat-square-dots"></i>
+
                     <strong>Adaptive Questions</strong>
-                    <small>Questions change with answers</small>
+
+                    <small>
+                        Questions change with answers
+                    </small>
                 </div>
 
                 <div class="info-item">
                     <i class="bi bi-mic"></i>
+
                     <strong>Voice Interview</strong>
-                    <small>Answer using your voice</small>
+
+                    <small>
+                        Answer using your voice
+                    </small>
                 </div>
 
             </div>
@@ -472,11 +954,82 @@
 </main>
 
 <script>
+    const pdfOption = document.getElementById("pdfOption");
+    const manualOption = document.getElementById("manualOption");
+
+    const pdfMethod = document.getElementById("pdfMethod");
+    const manualMethod = document.getElementById("manualMethod");
+
+    const pdfSection = document.getElementById("pdfSection");
+    const manualSection = document.getElementById("manualSection");
+
+    const pdfRoleSection = document.getElementById("pdfRoleSection");
+
+    const inputMethod = document.getElementById("inputMethod");
+
     const resumeInput = document.getElementById("resume");
     const fileName = document.getElementById("fileName");
     const uploadZone = document.getElementById("uploadZone");
+
     const interviewForm = document.getElementById("interviewForm");
     const startButton = document.getElementById("startButton");
+
+    function selectMethod(method) {
+
+        if (method === "pdf") {
+
+            pdfOption.checked = true;
+
+            pdfMethod.classList.add("active");
+            manualMethod.classList.remove("active");
+
+            pdfSection.classList.add("active");
+            manualSection.classList.remove("active");
+
+            pdfRoleSection.style.display = "block";
+
+            inputMethod.value = "pdf";
+
+            startButton.innerHTML =
+                '<i class="bi bi-stars me-2"></i>' +
+                'Analyze Resume & Start AI Interview';
+
+        } else {
+
+            manualOption.checked = true;
+
+            manualMethod.classList.add("active");
+            pdfMethod.classList.remove("active");
+
+            manualSection.classList.add("active");
+            pdfSection.classList.remove("active");
+
+            pdfRoleSection.style.display = "none";
+
+            inputMethod.value = "manual";
+
+            startButton.innerHTML =
+                '<i class="bi bi-stars me-2"></i>' +
+                'Create Personalized AI Interview';
+
+        }
+    }
+
+    pdfMethod.addEventListener("click", function () {
+        selectMethod("pdf");
+    });
+
+    manualMethod.addEventListener("click", function () {
+        selectMethod("manual");
+    });
+
+    pdfOption.addEventListener("change", function () {
+        selectMethod("pdf");
+    });
+
+    manualOption.addEventListener("change", function () {
+        selectMethod("manual");
+    });
 
     resumeInput.addEventListener("change", function () {
 
@@ -484,26 +1037,102 @@
 
             const file = this.files[0];
 
+            if (file.type !== "application/pdf") {
+
+                alert("Please select a PDF file.");
+
+                this.value = "";
+                fileName.style.display = "none";
+
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+
+                alert("The PDF must be smaller than 10 MB.");
+
+                this.value = "";
+                fileName.style.display = "none";
+
+                return;
+            }
+
             fileName.textContent =
                 "Selected: " + file.name;
 
             fileName.style.display = "block";
 
-            uploadZone.style.borderColor =
-                "#8b5cf6";
+            uploadZone.style.borderColor = "#7c3aed";
         }
-
     });
 
-    interviewForm.addEventListener("submit", function () {
+    interviewForm.addEventListener("submit", function (event) {
+
+        if (inputMethod.value === "pdf") {
+
+            if (!resumeInput.files.length) {
+
+                event.preventDefault();
+
+                alert("Please upload your resume PDF.");
+
+                return;
+            }
+
+        } else {
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const profile =
+                document.getElementById("profile").value.trim();
+
+            const role =
+                document.getElementById("target_role").value.trim();
+
+            if (!name) {
+
+                event.preventDefault();
+
+                alert("Please enter your name.");
+
+                document.getElementById("name").focus();
+
+                return;
+            }
+
+            if (!role) {
+
+                event.preventDefault();
+
+                alert("Please select your target job role.");
+
+                document.getElementById("target_role").focus();
+
+                return;
+            }
+
+            if (!profile) {
+
+                event.preventDefault();
+
+                alert("Please tell us something about yourself.");
+
+                document.getElementById("profile").focus();
+
+                return;
+            }
+        }
 
         startButton.disabled = true;
 
         startButton.innerHTML =
             '<span class="spinner-border spinner-border-sm me-2"></span>' +
-            'Analyzing Resume...';
+            'Preparing Your AI Interview...';
 
     });
+
+    selectMethod("pdf");
 </script>
 
 </body>
