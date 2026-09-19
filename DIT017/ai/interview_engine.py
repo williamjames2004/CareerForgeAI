@@ -199,19 +199,30 @@ def generate_question(session, client, model_name):
             0
         ) + 1
 
-        print("Gemini question generation failed:")
-        print(error)
+        print("========================================")
+        print("GEMINI QUESTION GENERATION FAILED")
+        print("Error:", repr(error))
+        print("========================================")
 
-        fallback = get_fallback_question(session)
+        try:
+            fallback = get_fallback_question(session)
 
-        if fallback:
-            print("Question source: Predefined fallback")
-            print("Question:", fallback)
+            if fallback:
+                print("Question source: Predefined fallback")
+                print("Question:", fallback)
 
-            return {
-                "question": fallback,
-                "source": "fallback"
-            }
+                return {
+                    "question": fallback,
+                    "source": "fallback"
+                }
+
+            print("ERROR: No fallback question available.")
+
+        except Exception as fallback_error:
+            print("========================================")
+            print("FALLBACK QUESTION GENERATION FAILED")
+            print("Error:", repr(fallback_error))
+            print("========================================")
 
         raise RuntimeError(
             "Gemini failed and no fallback question is available."

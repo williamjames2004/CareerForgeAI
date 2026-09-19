@@ -211,15 +211,16 @@ def prepare_question_pool(session):
 
 
 def get_fallback_question(session):
-    if "question_pool" not in session:
+    if not session.get("question_pool"):
         session["question_pool"] = prepare_question_pool(session)
 
     used_questions = {
         item.get("question")
         for item in session.get("questions", [])
+        if item.get("question")
     }
 
-    for question in session["question_pool"]:
+    for question in session.get("question_pool", []):
         if question not in used_questions:
             return question
 
