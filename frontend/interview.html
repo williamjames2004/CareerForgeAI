@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerForge AI - Interview</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: #f7f8fc;
+        }
+
+        .interview-wrapper {
+            min-height: 100vh;
+        }
+
+        .interview-card {
+            border: 0;
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-badge {
+            background: #eef2ff;
+            color: #4f46e5;
+            border-radius: 50px;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border: 1px solid #e7e9f5;
+            border-radius: 20px;
+            min-height: 190px;
+        }
+
+        .question-text {
+            font-size: 24px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .ai-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            background: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .mic-button {
+            width: 90px;
+            height: 90px;
+            border: 0;
+            border-radius: 50%;
+            background: #4f46e5;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
+            transition: 0.2s;
+        }
+
+        .mic-button:hover {
+            transform: scale(1.05);
+        }
+
+        .mic-button.recording {
+            background: #dc3545;
+            animation: pulse 1.4s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 18px rgba(220, 53, 69, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+            }
+        }
+
+        .transcript-box {
+            min-height: 120px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 20px;
+        }
+
+        .status {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container interview-wrapper py-4">
+
+    <div class="row justify-content-center" id="interviewData">
+
+        <div class="col-xl-9 col-lg-10">
+
+            <div class="card interview-card p-4 p-md-5">
+
+                <!-- HEADER -->
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+                        <span class="top-badge" id="interviewType">
+                            <i class="bi bi-stars me-1"></i>
+                            INTERVIEW
+                        </span>
+                    </div>
+
+                    <div class="fw-semibold text-secondary">
+                        Question
+                        <span id="questionNumber">1</span>
+                        /
+                        <span id="totalQuestions">15</span>
+                    </div>
+
+                </div>
+
+                <!-- PROGRESS -->
+
+                <div class="progress mb-5">
+                    <div
+                        id="progressBar"
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 6.67%">
+                    </div>
+                </div>
+
+                <!-- AI QUESTION -->
+
+                <div class="question-box p-4 p-md-5 mb-4">
+
+                    <div class="d-flex gap-3 align-items-start">
+
+                        <div class="ai-icon flex-shrink-0">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <div class="flex-grow-1">
+
+                            <div class="small text-primary fw-bold mb-2">
+                                CAREERFORGE AI
+                            </div>
+
+                            <div
+                                class="question-text"
+                                id="questionText">
+                                Loading interview question...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- SPEAKING AREA -->
+
+                <div class="text-center py-3">
+
+                    <div class="mb-3">
+
+                        <button
+                            type="button"
+                            class="mic-button"
+                            id="micButton"
+                            disabled>
+
+                            <i
+                                class="bi bi-mic-fill"
+                                id="micIcon">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+                    <h5
+                        class="fw-bold mb-1"
+                        id="voiceTitle">
+                        Preparing interview...
+                    </h5>
+
+                    <p
+                        class="text-secondary mb-3"
+                        id="voiceDescription">
+                        AI will ask the question first.
+                    </p>
+
+                    <div
+                        class="status text-secondary"
+                        id="statusText">
+                        Initializing...
+                    </div>
+
+                </div>
+
+                <!-- TRANSCRIPT -->
+
+                <div class="mt-4">
+
+                    <div class="d-flex justify-content-between mb-2">
+
+                        <label class="fw-semibold">
+                            Your Answer
+                        </label>
+
+                        <span
+                            class="small text-secondary"
+                            id="answerStatus">
+                            Waiting
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="transcript-box p-3"
+                        id="transcriptBox">
+
+                        <span
+                            class="text-secondary"
+                            id="transcriptText">
+                            Your spoken answer will appear here...
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- DONE BUTTON -->
+
+                <div class="text-center mt-4">
+
+                    <button
+                        type="button"
+                        class="btn btn-primary btn-lg px-5 rounded-3"
+                        id="doneButton"
+                        disabled>
+
+                        <i class="bi bi-check2-circle me-2"></i>
+                        Done
+
+                    </button>
+
+                    <div class="small text-secondary mt-2">
+                        Click Done when you have finished your answer.
+                    </div>
+
+                </div>
+
+                <!-- AUDIO INFO -->
+
+                <div class="alert alert-light border rounded-4 mt-4 mb-0">
+
+                    <div class="d-flex gap-3">
+
+                        <i class="bi bi-record-circle text-danger fs-4"></i>
+
+                        <div class="small">
+
+                            <strong>Interview recording</strong>
+
+                            <div class="text-secondary mt-1">
+                                Your interview audio is being recorded
+                                for the final downloadable MP3.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API_BASE = "http://127.0.0.1:5000";
+
+const token = localStorage.getItem("careerforge_token");
+const interviewId = localStorage.getItem("careerforge_interview_id");
+
+if (!token || !interviewId) {
+    window.location.href = "login.html?redirect=interview-setup.html";
+}
+
+const interviewData = document.getElementById("interviewData");
+const interviewType = document.getElementById("interviewType");
+const questionText = document.getElementById("questionText");
+const questionNumber = document.getElementById("questionNumber");
+const totalQuestions = document.getElementById("totalQuestions");
+const progressBar = document.getElementById("progressBar");
+const micButton = document.getElementById("micButton");
+const micIcon = document.getElementById("micIcon");
+const doneButton = document.getElementById("doneButton");
+const transcriptText = document.getElementById("transcriptText");
+const voiceTitle = document.getElementById("voiceTitle");
+const voiceDescription = document.getElementById("voiceDescription");
+const statusText = document.getElementById("statusText");
+const answerStatus = document.getElementById("answerStatus");
+
+let recognition = null;
+let currentAnswer = "";
+let interimAnswer = "";
+
+let isListening = false;
+let isProcessing = false;
+let manuallyStopped = false;
+
+let recorder = null;
+let recordedChunks = [];
+
+let audioContext = null;
+let audioDestination = null;
+
+let microphoneStream = null;
+let tabStream = null;
+
+
+// --------------------------------------------------
+// SPEECH RECOGNITION
+// --------------------------------------------------
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+
+    recognition = new SpeechRecognition();
+
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-IN";
+
+    recognition.onstart = function() {
+
+        isListening = true;
+
+        micButton.disabled = false;
+        micButton.classList.add("recording");
+
+        micIcon.className = "bi bi-stop-fill";
+
+        voiceTitle.textContent = "Listening...";
+
+        voiceDescription.textContent =
+            "Speak your answer naturally.";
+
+        statusText.textContent =
+            "Listening to your answer...";
+
+        answerStatus.textContent = "Recording";
+    };
+
+    recognition.onresult = function(event) {
+
+        let finalText = "";
+        let interimText = "";
+
+        for (
+            let i = event.resultIndex;
+            i < event.results.length;
+            i++
+        ) {
+
+            const text =
+                event.results[i][0].transcript;
+
+            if (event.results[i].isFinal) {
+                finalText += text + " ";
+            } else {
+                interimText += text;
+            }
+        }
+
+        if (finalText) {
+            currentAnswer += finalText;
+        }
+
+        interimAnswer = interimText;
+
+        const displayText =
+            (currentAnswer + interimAnswer).trim();
+
+        if (displayText) {
+
+            transcriptText.textContent =
+                displayText;
+
+            transcriptText.classList.remove(
+                "text-secondary"
+            );
+
+            doneButton.disabled = false;
+        }
+    };
+
+    recognition.onerror = function(event) {
+
+        console.log(
+            "Speech recognition error:",
+            event.error
+        );
+
+        if (event.error === "not-allowed") {
+
+            statusText.textContent =
+                "Microphone permission was denied.";
+
+        } else if (event.error === "no-speech") {
+
+            statusText.textContent =
+                "No speech detected. Continue speaking.";
+
+        } else {
+
+            statusText.textContent =
+                "Speech recognition error. Try again.";
+        }
+    };
+
+    recognition.onend = function() {
+
+        isListening = false;
+
+        micButton.classList.remove("recording");
+
+        micIcon.className = "bi bi-mic-fill";
+
+        if (
+            !manuallyStopped &&
+            !isProcessing
+        ) {
+
+            try {
+                recognition.start();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+} else {
+
+    statusText.textContent =
+        "Speech recognition is not supported in this browser.";
+
+    micButton.disabled = true;
+}
+
+
+// --------------------------------------------------
+// AUDIO RECORDING
+// --------------------------------------------------
+
+async function startAudioRecording() {
+
+    try {
+
+        microphoneStream =
+            await navigator.mediaDevices.getUserMedia({
+                audio: true
+            });
+
+        try {
+
+            tabStream =
+                await navigator.mediaDevices.getDisplayMedia({
+                    video: true,
+                    audio: true
+                });
+
+        } catch (error) {
+
+            console.log(
+                "Tab audio capture unavailable:",
+                error
+            );
+
+            tabStream = null;
+        }
+
+        audioContext = new AudioContext();
+
+        audioDestination =
+            audioContext.createMediaStreamDestination();
+
+        const micSource =
+            audioContext.createMediaStreamSource(
+                microphoneStream
+            );
+
+        micSource.connect(audioDestination);
+
+        if (
+            tabStream &&
+            tabStream.getAudioTracks().length
+        ) {
+
+            const tabAudioStream =
+                new MediaStream(
+                    tabStream.getAudioTracks()
+                );
+
+            const tabSource =
+                audioContext.createMediaStreamSource(
+                    tabAudioStream
+                );
+
+            tabSource.connect(audioDestination);
+        }
+
+        recorder =
+            new MediaRecorder(
+                audioDestination.stream,
+                {
+                    mimeType: "audio/webm"
+                }
+            );
+
+        recordedChunks = [];
+
+        recorder.ondataavailable =
+            function(event) {
+
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+
+        recorder.start(1000);
+
+        console.log(
+            "Interview audio recording started."
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Audio recording unavailable:",
+            error
+        );
+    }
+}
+
+
+// --------------------------------------------------
+// STOP + UPLOAD AUDIO
+// --------------------------------------------------
+
+function stopAndUploadAudio() {
+
+    return new Promise((resolve) => {
+
+        if (!recorder) {
+            resolve(false);
+            return;
+        }
+
+        recorder.onstop = async function() {
+
+            try {
+
+                const blob =
+                    new Blob(
+                        recordedChunks,
+                        {
+                            type: "audio/webm"
+                        }
+                    );
+
+                const formData =
+                    new FormData();
+
+                formData.append(
+                    "audio",
+                    blob,
+                    "interview.webm"
+                );
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/api/interview/${interviewId}/audio`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${token}`
+                            },
+                            body: formData
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                console.log(
+                    "Audio upload:",
+                    data
+                );
+
+                if (microphoneStream) {
+
+                    microphoneStream
+                        .getTracks()
+                        .forEach(
+                            track => track.stop()
+                        );
+                }
+
+                if (tabStream) {
+
+                    tabStream
+                        .getTracks()
+                        .forEach(
+                            track => track.stop()
+                        );
+                }
+
+                if (audioContext) {
+                    await audioContext.close();
+                }
+
+                resolve(data.success);
+
+            } catch (error) {
+
+                console.log(
+                    "Audio upload error:",
+                    error
+                );
+
+                resolve(false);
+            }
+        };
+
+        recorder.stop();
+    });
+}
+
+
+// --------------------------------------------------
+// AI SPEAKS QUESTION
+// --------------------------------------------------
+
+function speakQuestion(question) {
+
+    return new Promise((resolve) => {
+
+        window.speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(question);
+
+        speech.lang = "en-IN";
+        speech.rate = 0.95;
+        speech.pitch = 1;
+
+        speech.onstart = function() {
+
+            voiceTitle.textContent =
+                "AI is speaking...";
+
+            voiceDescription.textContent =
+                "Listen carefully to the question.";
+
+            statusText.textContent =
+                "AI interviewer is asking the question.";
+
+            micButton.disabled = true;
+            doneButton.disabled = true;
+        };
+
+        speech.onend = function() {
+
+            voiceTitle.textContent =
+                "Your turn";
+
+            voiceDescription.textContent =
+                "Speak your answer, then click Done.";
+
+            statusText.textContent =
+                "You can start speaking now.";
+
+            micButton.disabled = false;
+
+            resolve();
+        };
+
+        speech.onerror = function() {
+
+            voiceTitle.textContent =
+                "Your turn";
+
+            voiceDescription.textContent =
+                "Speak your answer, then click Done.";
+
+            micButton.disabled = false;
+
+            resolve();
+        };
+
+        window.speechSynthesis.speak(speech);
+    });
+}
+
+
+// --------------------------------------------------
+// START LISTENING
+// --------------------------------------------------
+
+function startListening() {
+
+    if (!recognition || isProcessing) {
+        return;
+    }
+
+    if (isListening) {
+        return;
+    }
+
+    manuallyStopped = false;
+
+    currentAnswer = "";
+    interimAnswer = "";
+
+    transcriptText.textContent =
+        "Listening...";
+
+    transcriptText.classList.add(
+        "text-secondary"
+    );
+
+    doneButton.disabled = true;
+
+    try {
+
+        recognition.start();
+
+    } catch (error) {
+
+        console.log(
+            "Recognition start error:",
+            error
+        );
+    }
+}
+
+
+// --------------------------------------------------
+// STOP LISTENING
+// --------------------------------------------------
+
+function stopListening() {
+
+    if (!recognition) {
+        return;
+    }
+
+    manuallyStopped = true;
+
+    try {
+        recognition.stop();
+    } catch (error) {
+        console.log(error);
+    }
+
+    isListening = false;
+}
+
+
+// --------------------------------------------------
+// MIC BUTTON
+// --------------------------------------------------
+
+micButton.addEventListener(
+    "click",
+    function() {
+
+        if (isProcessing) {
+            return;
+        }
+
+        if (isListening) {
+            stopListening();
+        } else {
+            startListening();
+        }
+    }
+);
+
+
+// --------------------------------------------------
+// DONE BUTTON
+// --------------------------------------------------
+
+doneButton.addEventListener(
+    "click",
+    async function() {
+
+        if (isProcessing) {
+            return;
+        }
+
+        const answer =
+            (
+                currentAnswer +
+                " " +
+                interimAnswer
+            ).trim();
+
+        if (!answer) {
+
+            statusText.textContent =
+                "Please speak your answer before clicking Done.";
+
+            return;
+        }
+
+        isProcessing = true;
+        manuallyStopped = true;
+
+        stopListening();
+        window.speechSynthesis.cancel();
+
+        doneButton.disabled = true;
+        micButton.disabled = true;
+
+        voiceTitle.textContent =
+            "Processing answer...";
+
+        voiceDescription.textContent =
+            "CareerForge AI is preparing the next question.";
+
+        statusText.textContent =
+            "Analyzing your response...";
+
+        answerStatus.textContent =
+            "Submitted";
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/api/interview/${interviewId}/answer`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            answer: answer
+                        })
+                    }
+                );
+
+            const data =
+                await response.json();
+
+            if (!response.ok || !data.success) {
+
+                throw new Error(
+                    data.message ||
+                    "Something went wrong."
+                );
+            }
+
+
+            // --------------------------------------
+            // INTERVIEW COMPLETED
+            // --------------------------------------
+
+            if (data.completed) {
+
+                voiceTitle.textContent =
+                    "Interview Completed";
+
+                voiceDescription.textContent =
+                    "Preparing your CareerForge AI report...";
+
+                statusText.textContent =
+                    "Generating final result.";
+
+                await stopAndUploadAudio();
+
+                window.location.href =
+                    `interview-result.html?interview_id=${encodeURIComponent(interviewId)}`;
+
+                return;
+            }
+
+
+            // --------------------------------------
+            // NEXT QUESTION
+            // --------------------------------------
+
+            questionText.textContent =
+                data.question;
+
+            questionNumber.textContent =
+                data.question_number;
+
+            totalQuestions.textContent =
+                data.total_questions;
+
+            const progress =
+                (
+                    data.question_number /
+                    data.total_questions
+                ) * 100;
+
+            progressBar.style.width =
+                `${progress}%`;
+
+            currentAnswer = "";
+            interimAnswer = "";
+
+            transcriptText.textContent =
+                "Your spoken answer will appear here...";
+
+            transcriptText.classList.add(
+                "text-secondary"
+            );
+
+            answerStatus.textContent =
+                "Waiting";
+
+            isProcessing = false;
+
+            await speakQuestion(data.question);
+
+            if (!isProcessing) {
+                startListening();
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            isProcessing = false;
+
+            voiceTitle.textContent =
+                "Something went wrong";
+
+            voiceDescription.textContent =
+                "Please try submitting your answer again.";
+
+            statusText.textContent =
+                error.message ||
+                "Unable to continue the interview.";
+
+            doneButton.disabled = false;
+
+            micButton.disabled = false;
+        }
+    }
+);
+
+
+// --------------------------------------------------
+// LOAD INTERVIEW FROM API
+// --------------------------------------------------
+
+async function loadInterview() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE}/api/interview/${interviewId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load interview."
+            );
+        }
+
+        if (data.completed) {
+
+            window.location.href =
+                `interview-result.html?interview_id=${encodeURIComponent(interviewId)}`;
+
+            return;
+        }
+
+        const type =
+            data.interview_type === "technical"
+                ? "TECHNICAL INTERVIEW"
+                : "HR INTERVIEW";
+
+        interviewType.innerHTML =
+            data.interview_type === "technical"
+                ? '<i class="bi bi-code-slash me-1"></i> TECHNICAL INTERVIEW'
+                : '<i class="bi bi-people me-1"></i> HR INTERVIEW';
+
+        questionText.textContent =
+            data.question;
+
+        questionNumber.textContent =
+            data.question_number;
+
+        totalQuestions.textContent =
+            data.total_questions;
+
+        const progress =
+            (
+                data.question_number /
+                data.total_questions
+            ) * 100;
+
+        progressBar.style.width =
+            `${progress}%`;
+
+        voiceTitle.textContent =
+            "Preparing interview...";
+
+        statusText.textContent =
+            "Requesting audio recording permission...";
+
+        await startAudioRecording();
+
+        await speakQuestion(data.question);
+
+        startListening();
+
+    } catch (error) {
+
+        console.error(error);
+
+        voiceTitle.textContent =
+            "Unable to load interview";
+
+        voiceDescription.textContent =
+            "Please start the interview again.";
+
+        statusText.textContent =
+            error.message;
+
+        micButton.disabled = true;
+        doneButton.disabled = true;
+    }
+}
+
+
+// --------------------------------------------------
+// INITIALIZE
+// --------------------------------------------------
+
+loadInterview();
+
+</script>
+
+</body>
+</html>
